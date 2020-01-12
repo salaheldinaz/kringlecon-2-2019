@@ -2,7 +2,17 @@
 Detailed technical write-up for KRINGLECON 2 CTF
 by [Salaheldin](https://twitter.com/salaheldinaz)
 
-Please Visit https://salaheldinaz.github.io/kringlecon-2-2019 to view the writeup
+Please Visit https://kringlecon2.salaheldin.online/ to view the writeup
+
+---
+
+## 🗺 Map
+
+This a preview of a very high quality map for ELF University.
+
+### To zoom and check the details please download the full quality. [click here](/images/kringlecon-map.png):
+
+![Map](images/map.jpg)
 
 ---
 
@@ -46,14 +56,6 @@ Challenge | Type | Direct Url | Elf | Location |
 [**10 Graylog**](/helptheelves/challenge10) | Log Analysis | [Link](https://graylog.elfu.org/) | Pepper Minstix | The Dorm
 [**11Smart Braces**](/helptheelves/challenge11) | Iptables | [link](https://docker2019.kringlecon.com/?challenge=iptables&id=ef59b992-558d-4580-b5a0-9cfa0d19f1df) | Kent Tinseltooth | Student Union
 [**12 Zeek JSON Analysis**](/helptheelves/challenge12) | Log Analysis | [Link](https://docker2019.kringlecon.com/?challenge=jq&id=ef59b992-558d-4580-b5a0-9cfa0d19f1df) | Wunorse Openslae | Sleigh Shop
-
----
-
-## 🗺 Map
-
-This a preview of a very high quality map for ELF University, to zoom and check the details please download the full quality. [click here](/images/kringlecon-map.png):
-
-![Map](images/map.jpg)
 
 ---
 
