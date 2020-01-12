@@ -1,0 +1,8 @@
+.idea/
+ven/
+classes/__pycache__/
+.DS_Store
+site/
+.venv/
+.venv
+Pipfile

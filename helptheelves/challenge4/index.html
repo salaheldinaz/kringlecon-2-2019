@@ -1,0 +1,1247 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Kringlecon2 CTF Writeup">
+      
+      
+      
+        <meta name="author" content="Salaheldinaz">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Splunk - The training questions - The Turtle Dove</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#e91e63">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/asciinema-player.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="pink" data-md-color-accent="grey">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#splunk-training-questions" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="The Turtle Dove" class="md-header-nav__button md-logo">
+          
+            <img src="../../images/logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              The Turtle Dove
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Splunk - The training questions
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="The Turtle Dove" class="md-nav__button md-logo">
+      
+        <img src="../../images/logo.png" width="48" height="48">
+      
+    </a>
+    The Turtle Dove
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Objectives
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Objectives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective0/" title="0 Talk to Santa in the Quad" class="md-nav__link">
+      0 Talk to Santa in the Quad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective1/" title="1 Find the Turtle Doves" class="md-nav__link">
+      1 Find the Turtle Doves
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective2/" title="2 Unredact Threatening Document" class="md-nav__link">
+      2 Unredact Threatening Document
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective3/" title="3 Windows Log Analysis - Evaluate Attack Outcome" class="md-nav__link">
+      3 Windows Log Analysis - Evaluate Attack Outcome
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective4/" title="4 Windows Log Analysis - Determine Attacker Technique" class="md-nav__link">
+      4 Windows Log Analysis - Determine Attacker Technique
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective5/" title="5 Windows Log Analysis - Determine Compromised System" class="md-nav__link">
+      5 Windows Log Analysis - Determine Compromised System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective6/" title="6 Splnuk" class="md-nav__link">
+      6 Splnuk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective7/" title="7 Get Access To The Steam Tunnels" class="md-nav__link">
+      7 Get Access To The Steam Tunnels
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective8/" title="8 Bypassing the Frido Sleigh CAPTEHA" class="md-nav__link">
+      8 Bypassing the Frido Sleigh CAPTEHA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective9/" title="9 Retrieve Scraps of Paper from Server" class="md-nav__link">
+      9 Retrieve Scraps of Paper from Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective10/" title="10 Recover Cleartext Document" class="md-nav__link">
+      10  Recover Cleartext Document
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective11/" title="11 Open the Sleigh Shop Door" class="md-nav__link">
+      11  Open the Sleigh Shop Door
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../objectives/objective12/" title="12 Filter Out Poisoned Sources of Weather Data" class="md-nav__link">
+      12  Filter Out Poisoned Sources of Weather Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Helping the elves
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helping the elves
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge1/" title="Escape Ed" class="md-nav__link">
+      Escape Ed
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge2/" title="Linux Path" class="md-nav__link">
+      Linux Path
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge3/" title="Xmas laser cheers" class="md-nav__link">
+      Xmas laser cheers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Splunk - The training questions
+      </label>
+    
+    <a href="./" title="Splunk - The training questions" class="md-nav__link md-nav__link--active">
+      Splunk - The training questions
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#splunk-training-questions" class="md-nav__link">
+    🎮 Splunk Training questions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    ⚡️ Solution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-is-the-short-host-name-of-professor-banas-computer" class="md-nav__link">
+    1. What is the short host name of Professor Banas' computer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-what-is-the-name-of-the-sensitive-file-that-was-likely-accessed-and-copied-by-the-attacker" class="md-nav__link">
+    2. What is the name of the sensitive file that was likely accessed and copied by the attacker?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-what-is-the-fully-qualified-domain-namefqdn-of-the-command-and-controlc2-server" class="md-nav__link">
+    3. What is the fully-qualified domain name(FQDN) of the command and control(C2) server?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-what-document-is-involved-with-launching-the-malicious-powershell-code" class="md-nav__link">
+    4. What document is involved with launching the malicious PowerShell code?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-how-many-unique-email-addresses-were-used-to-send-holiday-cheer-essays-to-professor-banas" class="md-nav__link">
+    5. How many unique email addresses were used to send Holiday Cheer essays to Professor Banas?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-what-was-the-password-for-the-zip-archive-that-contained-the-suspicious-file" class="md-nav__link">
+    6. What was the password for the zip archive that contained the suspicious file?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-what-email-address-did-the-suspicious-file-come-from" class="md-nav__link">
+    7.  What email address did the suspicious file come from?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-youve-learned" class="md-nav__link">
+    🎓 What you've learned
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge5/" title="Mongo Pilfer" class="md-nav__link">
+      Mongo Pilfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge6/" title="Nyanshell" class="md-nav__link">
+      Nyanshell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge7/" title="Frosty Keypad" class="md-nav__link">
+      Frosty Keypad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge8/" title="Holiday Hack trail" class="md-nav__link">
+      Holiday Hack trail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge9/" title="Key Bitting" class="md-nav__link">
+      Key Bitting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge10/" title="Graylog" class="md-nav__link">
+      Graylog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge11/" title="Smart Braces" class="md-nav__link">
+      Smart Braces
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge12/" title="Zeek JSON Analysis" class="md-nav__link">
+      Zeek JSON Analysis
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../terminals/" title="Terminals & Portals" class="md-nav__link">
+      Terminals & Portals
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#splunk-training-questions" class="md-nav__link">
+    🎮 Splunk Training questions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    ⚡️ Solution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-is-the-short-host-name-of-professor-banas-computer" class="md-nav__link">
+    1. What is the short host name of Professor Banas' computer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-what-is-the-name-of-the-sensitive-file-that-was-likely-accessed-and-copied-by-the-attacker" class="md-nav__link">
+    2. What is the name of the sensitive file that was likely accessed and copied by the attacker?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-what-is-the-fully-qualified-domain-namefqdn-of-the-command-and-controlc2-server" class="md-nav__link">
+    3. What is the fully-qualified domain name(FQDN) of the command and control(C2) server?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-what-document-is-involved-with-launching-the-malicious-powershell-code" class="md-nav__link">
+    4. What document is involved with launching the malicious PowerShell code?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-how-many-unique-email-addresses-were-used-to-send-holiday-cheer-essays-to-professor-banas" class="md-nav__link">
+    5. How many unique email addresses were used to send Holiday Cheer essays to Professor Banas?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-what-was-the-password-for-the-zip-archive-that-contained-the-suspicious-file" class="md-nav__link">
+    6. What was the password for the zip archive that contained the suspicious file?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-what-email-address-did-the-suspicious-file-come-from" class="md-nav__link">
+    7.  What email address did the suspicious file come from?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-youve-learned" class="md-nav__link">
+    🎓 What you've learned
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Splunk - The training questions</h1>
+                
+                <h2 id="splunk-training-questions"><strong>🎮 Splunk Training questions</strong><a class="headerlink" href="#splunk-training-questions" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>📍 The Laboratory</p>
+</blockquote>
+<p><img alt="chl4-1" src="../images/chl4/1.png" /></p>
+<div class="admonition quote">
+<p class="admonition-title">👨‍🔬 Dr. Banas</p>
+<p>Hi, I'm Dr. Banas, professor of Cheerology at Elf University.<br>
+This term, I'm teaching "HOL 404: The Search for Holiday Cheer in Popular Culture," and I've had quite a shock!<br></p>
+<p>I was at home enjoying a nice cup of Gløgg when I had a call from Kent, one of my students who interns at the Elf U SOC. Kent said that my computer has been hacking other computers on campus and that I needed to fix it ASAP!<br>
+If I don't, he will have to report the incident to the boss of the SOC.</p>
+<p>Apparently, I can find out more information from this website <a href="https://splunk.elfu.org/">https://splunk.elfu.org/</a> with the username: elf / Password: elfsocks.</p>
+<p>I don't know anything about computer security. Can you please help me?</p>
+</div>
+<details class="tip"><summary>Watch &gt; Talk by James Brodsky | Dashing Through the Logs</summary><p><a href="http://www.youtube.com/watch?v=qbIhHhRKQCw"><i class="fa fa-youtube-play" aria-hidden="true"></i> Watch Dashing Through the Logs</a></p>
+<p>If you want your hunt to be successful, you need to look where the threats are. In modern environments, that means collecting endpoint and email logs and knowing what to search for in it. In this talk, we will cover critical Windows-based security event log sources like Sysmon, PowerShell, and process launch events.</p>
+<p>Additionally, we will introduce the stoQ automation framework for analyzing email. We’ll show you how to use this data to pragmatically hunt for threats operating in your environment.</p>
+</details>
+<p>Go to <a href="https://splunk.elfu.org/">https://splunk.elfu.org/</a> and login with following:</p>
+<ul>
+<li>Username: <code>elf</code></li>
+<li>Password: <code>elfsocks</code></li>
+</ul>
+<p><img alt="chl4-2" src="../images/chl4/2.jpg" /></p>
+<div class="admonition info">
+<p class="admonition-title">The Search for Holiday Cheer Challenge</p>
+<ol>
+<li>
+<p>Your goal is to answer the Challenge Question. You will include the answer to this question in your HHC write-up!</p>
+</li>
+<li>
+<p>You do not need to answer the training questions. You may simply search through the Elf U SOC data to find the answer to the final question on your own.</p>
+</li>
+<li>
+<p>If you need some guidance, answer the training questions! Each one will help you get closer to the answering the Challenge Question.</p>
+</li>
+<li>
+<p>Characters in the SOC Secure Chat are there to help you. If you see a blinking red dot next to a character, click on them and read the chat history to learn what they have to teach you! And don't forget to scroll up in the chat history!</p>
+</li>
+<li>
+<p>To search the SOC data, just click the <a href="https://splunk.elfu.org/en-US/app/SA-elfusoc/search">Search</a> link in the navigation bar in the upper left hand corner of the page.</p>
+</li>
+<li>
+<p>This challenge is best enjoyed on a laptop or desktop computer with screen width of 1600 pixels or more.</p>
+</li>
+<li>
+<p><em>WARNING</em> This is a defensive challenge. Do not attack this system, web application, or back-end APIs.</p>
+</li>
+</ol>
+<details class="info"><summary>Welcome message</summary><p><img alt="chl4-3" src="../images/chl4/3.png" /></p>
+</details>
+</div>
+<hr />
+<h3 id="solution">⚡️ Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h3>
+<p>Let's begin with the Training Questions:</p>
+<h4 id="1-what-is-the-short-host-name-of-professor-banas-computer">1. What is the short host name of Professor Banas' computer?<a class="headerlink" href="#1-what-is-the-short-host-name-of-professor-banas-computer" title="Permanent link">&para;</a></h4>
+<p>Let's check <em>Kent</em> chat first because he is the one informed <em>Professor Banas</em> about the hacking:</p>
+<details class="quote"><summary>Chat with Kent</summary><p><img alt="chl4-c2" src="../images/chl4/chat-2.png" /></p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">Read the chats very carefully.</p>
+</div>
+<p><br> Go check out #ELFU SOC as he suggest:</p>
+<details class="quote"><summary>Chat with #ELFU SOC</summary><p><img alt="chl4-c3" src="../images/chl4/chat-3.png" /></p>
+</details>
+<p>Easy to find in the #ELFU SOC chat:<br>
+<code>We have some system called</code> <em>sweetums</em> <code>here on campus communicating with the same weird IP, that's Professor Banas' system.</code></p>
+<p>Enter <code>sweetums</code> on the right input box next to the question to unlock the next question.</p>
+<div class="admonition success">
+<p class="admonition-title">Training Question 1: Correct</p>
+<p>sweetums</p>
+</div>
+<hr />
+<h4 id="2-what-is-the-name-of-the-sensitive-file-that-was-likely-accessed-and-copied-by-the-attacker">2. What is the name of the sensitive file that was likely accessed and copied by the attacker?<a class="headerlink" href="#2-what-is-the-name-of-the-sensitive-file-that-was-likely-accessed-and-copied-by-the-attacker" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p>Please provide the fully qualified location of the file. (Example: <code>C:\temp\report.pdf</code>)</p>
+</div>
+<p>Check Alice's chat:</p>
+<details class="quote"><summary>Chat with Alice Bluebird</summary><p><img alt="chl4-c1" src="../images/chl4/chat-1.png" /></p>
+</details>
+<details class="quote"><summary>Chat with Alice Bluebird - After answer question #1</summary><p><img alt="chl4-c4" src="../images/chl4/chat-4.png" /></p>
+</details>
+<div class="admonition hint">
+<p class="admonition-title">Searching by interesting word</p>
+<p>If you have a word that you are really interested in, just start searching for it. Here is an example of searching for the professor's username : <a href="https://splunk.elfu.org/en-US/app/SA-elfusoc/search?q=search%20index%3Dmain%20cbanas&amp;display.page.search.mode=smart&amp;dispatch.sample_ratio=1&amp;earliest=0&amp;latest=now&amp;display.general.type=events&amp;display.page.search.tab=events">Example Link</a>
+<div class="codehilite"><pre><span></span>index=main cbanas
+</pre></div></p>
+<p>Use that technique (with a different search term) to answer question 2.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Which word to search?</p>
+<p>Our very first worry was they may have found some of <code>Santa</code>'s sensitive data. Maybe start with his name</p>
+</div>
+<p>Let's follow his instructions &amp; hints:</p>
+<ol>
+<li>
+<p><a href="https://splunk.elfu.org/en-US/app/SA-elfusoc/search">Click here</a>  or hit the Search link in the navigation up above to get started.</p>
+</li>
+<li>
+<p>Search using <code>Santa</code>:</p>
+<div class="codehilite"><pre><span></span>index=main santa
+</pre></div>
+
+<p><img alt="chl4-5" src="../images/chl4/5.png" /></p>
+</li>
+<li>
+<p>Lets analysis the results:</p>
+<ol>
+<li>
+<p>The attacker accessed <code>cbanas</code> account on <code>sweetums</code>'s computer.</p>
+</li>
+<li>
+<p>Using <code>Get-ChildItem</code> cmdlet in Powershell listed all files in <code>C:\Users\cbanas</code>.</p>
+<p>The resulted files :
+<div class="codehilite"><pre><span></span>  - Microsoft Edge.lnk
+  - Naughty_and_Nice_2019_draft.txt
+  - 19th Century Holiday Cheer Assignment.doc
+  - assignment.zip
+  - Bing.url
+  - Desktop.lnk
+  - Downloads.lnk
+  - winrt--{S-1-5-21-1217370868-2414566453-2573080502-1004}-.searchconnector-ms
+</pre></div></p>
+</li>
+<li>
+<p>Piped the result into <code>ForEach-Object</code> command to execute <code>Select-String</code> cmdlet for each object returned to search for word <code>Santa</code>.</p>
+<div class="codehilite"><pre><span></span><span class="nb">Select-String</span> <span class="n">-path</span> <span class="nv">$_</span> <span class="n">-pattern</span> <span class="n">Santa</span>
+</pre></div>
+
+</li>
+<li>
+<p>He found his target in this file:
+    <div class="codehilite"><pre><span></span>C:\Users\cbanas\Documents\Naughty_and_Nice_2019_draft.txt
+</pre></div></p>
+<p>Then sends a file's contents to the <code>Out-String</code> cmdlet to displays it in the PowerShell console.</p>
+<div class="codehilite"><pre><span></span>Carl, you know there&#39;s no one I trust more than you to help.
+Can you have a look at this draft Naughty and Nice list for 2019 and let me know your thoughts?
+-Santa
+</pre></div>
+
+</li>
+<li>
+<p>Also we see the download of the scanning tool, That's interesting:</p>
+<p><img alt="chl4-6" src="../images/chl4/6.png" /></p>
+<p>but let's stay on task here.</p>
+</li>
+</ol>
+</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Training Question 2: Correct</p>
+<p><code>C:\Users\cbanas\Documents\Naughty_and_Nice_2019_draft.txt</code></p>
+</div>
+<hr />
+<h4 id="3-what-is-the-fully-qualified-domain-namefqdn-of-the-command-and-controlc2-server">3. What is the fully-qualified domain name(FQDN) of the command and control(C2) server?<a class="headerlink" href="#3-what-is-the-fully-qualified-domain-namefqdn-of-the-command-and-controlc2-server" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p>(Example: <code>badguy.baddies.com</code>)</p>
+</div>
+<p>Check Alice's chat:</p>
+<details class="quote"><summary>Chat with Alice Bluebird - After answer question #2</summary><p><img alt="chl4-c5" src="../images/chl4/chat-5.png" /></p>
+</details>
+<div class="admonition hint">
+<p class="admonition-title">Microsoft Sysmon data</p>
+<p><a href="https://www.splunk.com/en_us/blog/security/a-salacious-soliloquy-on-sysmon.html">https://www.splunk.com/en_us/blog/security/a-salacious-soliloquy-on-sysmon.html</a></p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Search Sysmon data in Splunk</p>
+<p>Start by specifying the <code>sourcetype</code> using a search like
+ <div class="codehilite"><pre><span></span>sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+</pre></div></p>
+<p>In Sysmon, <code>Event Code 3</code> represents network connections and you can narrow your search by adding the term <code>powershell</code>.<br>
+ <div class="codehilite"><pre><span></span>index=main sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational powershell EventCode=3
+</pre></div></p>
+<p>There is an implied boolean <code>AND</code> operator between any search terms that you add. Try to narrow your search to include these terms.<br></p>
+<p>Look through the lists of <code>Interesting Fields</code> and <code>Selected Fields</code> in the left-hand column of the search window.</p>
+</div>
+<p>Given the hints, our search will be:</p>
+<div class="codehilite"><pre><span></span>index=main sourcetype=XmlWinEventLog:Microsoft-Windows-Sysmon/Operational powershell EventCode=3
+</pre></div>
+
+<p>Then select <code>Interesting Fields</code> under <code>Selected Fields</code> in the left-hand column of the search window:</p>
+<p><img alt="chl4-7" src="../images/chl4/7.png" /></p>
+<div class="admonition success">
+<p class="admonition-title">Training Question 3: Correct</p>
+<p><code>144.202.46.214.vultr.com</code></p>
+</div>
+<hr />
+<h4 id="4-what-document-is-involved-with-launching-the-malicious-powershell-code">4. What document is involved with launching the malicious PowerShell code?<a class="headerlink" href="#4-what-document-is-involved-with-launching-the-malicious-powershell-code" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p>Please provide just the filename. (Example: <code>results.txt</code>)</p>
+</div>
+<p>Check Alice's chat:</p>
+<details class="quote"><summary>Chat with Alice Bluebird - After answer question #3</summary><p><img alt="chl4-c6" src="../images/chl4/chat-6.png" /></p>
+</details>
+<div class="admonition hint">
+<p class="admonition-title">View the PowerShell logs</p>
+<p><div class="codehilite"><pre><span></span>index=main sourcetype=&quot;WinEventLog:Microsoft-Windows-Powershell/Operational&quot;
+</pre></div>
+We need to determine the <code>process ID</code> or <code>process GUID</code>, We can pivot on <code>time</code>.</p>
+</div>
+<div class="admonition hint">
+<p>Flip the results of that last search so the oldest event is at the top of the list by adding <code>| reverse</code> to the end .</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Pivot on <code>time</code>.</p>
+<p>Look at the Time column in your search results. If you click on the date/timestamp from that first event, you can specify a time window.<br>
+Accept the default of &plusmn; five seconds and click apply.<br>
+Then remove the <code>sourcetype</code> search term and also remove the <code>| reverse</code> and re-run the search.</p>
+</div>
+<div class="admonition hint">
+<p>If Sysmon Event Code <code>1</code> results are not available, try looking for Windows Process Execution events (Event ID <code>4688</code>). A search to get you started with 4688 logs is
+<div class="codehilite"><pre><span></span>sourcetype=WinEventLog EventCode=4688
+</pre></div></p>
+</div>
+<div class="admonition hint">
+<p>Keep in mind that <code>4688</code> events record process IDs in <code>hexadecimal</code>, so you may need to do some conversion.</p>
+</div>
+<p>Let's start our search:</p>
+<ol>
+<li>
+<p>Search for all the PowerShell logs and reverse the results order to get the oldest one:
+    <div class="codehilite"><pre><span></span>index=main sourcetype=&quot;WinEventLog:Microsoft-Windows-Powershell/Operational&quot; | reverse
+</pre></div></p>
+<p><img alt="chl4-8" src="../images/chl4/8.png" /></p>
+</li>
+<li>
+<p>Pivot on time: Look at the Time column in the search results then click on the date/timestamp from that first event, Accept the default of <code>+/- five seconds</code>.</p>
+<p><img alt="chl4-9" src="../images/chl4/9.png" /></p>
+<p>Then remove the <code>sourcetype</code> search term and also remove the <code>| reverse</code> and re-run the search.</p>
+<p><img alt="chl4-11" src="../images/chl4/11.png" /></p>
+</li>
+<li>
+<p>Click on <code>process_id</code> on the left panel and you should be able to find two different process IDs from Sysmon events in that time window...</p>
+<p><img alt="chl4-12" src="../images/chl4/12.png" /></p>
+<p>Now we have two process id : <code>6268</code>, <code>5864</code>.</p>
+</li>
+<li>
+<p>We need to uncover what launched those processes. Check Sysmon Event Code 1 by clicking <code>EventCode</code> on the left panel and select Event Code <code>1</code> :</p>
+<p><img alt="chl4-13" src="../images/chl4/13.png" /></p>
+<p><img alt="chl4-14" src="../images/chl4/14.png" /></p>
+</li>
+<li>
+<p>The Sysmon Event Code <code>1</code> results are not leading to anything, Let's try looking for <mark>Windows Process Execution events</mark> (Event ID <code>4688</code>) as suggested with the process ids we found.</p>
+<p>First set your time window back to all time:<br>
+Go to search bar on the right &gt; Select Date time range &gt; Presets &gt; All time :</p>
+<p><img alt="chl4-15" src="../images/chl4/15.png" /></p>
+<p>Then the <code>4688</code> events record process IDs in <code>hexadecimal</code>, so we need to do some conversion:</p>
+<p><code>5864</code> to hex <code>0x16E8</code></p>
+<p><code>6268</code> to hex <code>0x187C</code></p>
+<p>Let's do the search for each</p>
+<div class="codehilite"><pre><span></span>index=main sourcetype=WinEventLog EventCode=4688 process_id=0x16E8
+</pre></div>
+
+<p>This one doesn't lead for a "document" that appears to be involved with kicking off all this PowerShell.</p>
+<p>Let's try second process id:</p>
+<p><div class="codehilite"><pre><span></span>index=main sourcetype=WinEventLog EventCode=4688 process_id=0x187C
+</pre></div>
+<img alt="chl4-16" src="../images/chl4/16.png" /></p>
+<div class="codehilite"><pre><span></span>Process Information:
+    New Process ID:     0x187c
+    New Process Name:   C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE
+    Token Elevation Type:   %%1938
+    Mandatory Label:        Mandatory Label\Medium Mandatory Level
+    Creator Process ID: 0x1748
+    Creator Process Name:   C:\Windows\explorer.exe
+<span class="hll">    Process Command Line:   &quot;C:\Program Files (x86)\Microsoft Office\Root\Office16\WINWORD.EXE&quot; /n &quot;C:\Windows\Temp\Temp1_Buttercups_HOL404_assignment (002).zip\19th Century Holiday Cheer Assignment.docm&quot; /o &quot;&quot;    
+</span></pre></div>
+
+<p>The file started all this is <code>19th Century Holiday Cheer Assignment.docm</code> which opened in Microsoft Word application.</p>
+</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Training Question 4: Correct</p>
+<p><code>19th Century Holiday Cheer Assignment.docm</code></p>
+</div>
+<hr />
+<h4 id="5-how-many-unique-email-addresses-were-used-to-send-holiday-cheer-essays-to-professor-banas">5. How many unique email addresses were used to send Holiday Cheer essays to Professor Banas?<a class="headerlink" href="#5-how-many-unique-email-addresses-were-used-to-send-holiday-cheer-essays-to-professor-banas" title="Permanent link">&para;</a></h4>
+<div class="admonition question">
+<p>Please provide the numeric value. (Example: <code>1</code>)</p>
+</div>
+<p>Check Alice's chat:</p>
+<details class="quote"><summary>Chat with Alice Bluebird - After answer question #4</summary><p><img alt="chl4-c7" src="../images/chl4/chat-7.png" /></p>
+</details>
+<div class="admonition hint">
+<p class="admonition-title">stoQ</p>
+<p><a href="https://stoq.punchcyber.com/">stoQ project home page</a></p>
+<p><a href="https://www.sans.org/cyber-security-summit/archives/file/summit_archive_1492181136.pdf">stoQ talk slides</a> from the SANS DFIR Summit.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Example search</p>
+<div class="codehilite"><pre><span></span>index=main sourcetype=stoq | table _time results{}.workers.smtp.to results{}.workers.smtp.from  results{}.workers.smtp.subject results{}.workers.smtp.body | sort - _time
+</pre></div>
+
+</div>
+<div class="admonition hint">
+<p>All assignment submissions must be made via email and must have the subject 'Holiday Cheer Assignment Submission'</p>
+</div>
+<div class="admonition hint">
+<p>Email addresses are not case sensitive so don't double-count them!.    </p>
+</div>
+<p>After viewing the stoQ slides and documentation, We need to find all emails with subject <code>Holiday Cheer Assignment Submission</code> and sent to <code>carl.banas@faculty.elfu.org</code> we noted from example search result.</p>
+<p>So our search query will be:</p>
+<div class="codehilite"><pre><span></span>index=main sourcetype=stoq results{}.workers.smtp.subject=&quot;Holiday Cheer Assignment Submission&quot; AND results{}.workers.smtp.to = &quot;*carl.banas@faculty.elfu.org*&quot; | table _time results{}.workers.smtp.to results{}.workers.smtp.subject results{}.workers.smtp.from
+</pre></div>
+
+<blockquote>
+<p><code>sourcetype=stoq</code> to use stoQ tool as source.<br>
+<code>results{}.workers.smtp.subject</code> to filter subjec to only "Holiday Cheer Assignment Submission".<br>
+<code>results{}.workers.smtp.to</code> to filter sent only to this address "<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#97;&#114;&#108;&#46;&#98;&#97;&#110;&#97;&#115;&#64;&#102;&#97;&#99;&#117;&#108;&#116;&#121;&#46;&#101;&#108;&#102;&#117;&#46;&#111;&#114;&#103;">&#99;&#97;&#114;&#108;&#46;&#98;&#97;&#110;&#97;&#115;&#64;&#102;&#97;&#99;&#117;&#108;&#116;&#121;&#46;&#101;&#108;&#102;&#117;&#46;&#111;&#114;&#103;</a>" and adding <code>*</code> to include all results with different letter cases.<br>
+<code>table</code> display results within table with fileds <code>time</code>,<code>receiver</code>, <code>subject</code>, <code>sender</code></p>
+</blockquote>
+<p><img alt="chl4-17" src="../images/chl4/17.png" /></p>
+<div class="admonition success">
+<p class="admonition-title">Training Question 5: Correct</p>
+<p>We have <code>21</code> events!</p>
+</div>
+<hr />
+<h4 id="6-what-was-the-password-for-the-zip-archive-that-contained-the-suspicious-file">6. What was the password for the zip archive that contained the suspicious file?<a class="headerlink" href="#6-what-was-the-password-for-the-zip-archive-that-contained-the-suspicious-file" title="Permanent link">&para;</a></h4>
+<p>Check Alice's chat:</p>
+<details class="quote"><summary>Chat with Alice Bluebird - After answer question #5</summary><p><img alt="chl4-c8" src="../images/chl4/chat-8.png" /></p>
+</details>
+<div class="admonition hint">
+<p class="admonition-title">MITRE ATT&amp;CK Technique 1193</p>
+<p><a href="https://attack.mitre.org/techniques/T1193/">https://attack.mitre.org/techniques/T1193/</a></p>
+</div>
+<div class="admonition hint">
+<p>Just use what you already know about the suspicious file name you identified, and about the type of visibility that stoQ gives you.</p>
+</div>
+<p>Given the hints we will search for suspicious file name <code>19th Century Holiday Cheer Assignment.docm</code> in the emails sent to Prof Carl:</p>
+<div class="codehilite"><pre><span></span>index=main sourcetype=stoq &quot;19th Century Holiday Cheer Assignment.docm&quot;  results{}.workers.smtp.to = &quot;*carl.banas@faculty.elfu.org*&quot; | table _time results{}.workers.smtp.from results{}.workers.smtp.subject results{}.workers.smtp.body
+</pre></div>
+
+<blockquote>
+<p><code>results{}.workers.smtp.body</code> to return body of the email.</p>
+</blockquote>
+<p><img alt="chl4-18" src="../images/chl4/18.png" /></p>
+<div class="codehilite"><pre><span></span>Professor Banas,
+
+I have completed my assignment.
+Please open the attached zip file with password 123456789 and then open the word document to view it.
+You will have to click &quot;Enable Editing&quot; then &quot;Enable Content&quot; to see it.
+This was a fun assignment. I hope you like it!
+
+--Bradly Buttercups
+</pre></div>
+
+<div class="admonition success">
+<p class="admonition-title">Training Question 5: Correct</p>
+<p>The password is  <code>123456789</code>.</p>
+</div>
+<hr />
+<h4 id="7-what-email-address-did-the-suspicious-file-come-from">7.  What email address did the suspicious file come from?<a class="headerlink" href="#7-what-email-address-did-the-suspicious-file-come-from" title="Permanent link">&para;</a></h4>
+<details class="quote"><summary>Chat with Alice Bluebird - After answer question #6</summary><p><img alt="chl4-c9" src="../images/chl4/chat-9.png" /></p>
+</details>
+<p>We know the answer from pervious results because we used <code>results{}.workers.smtp.from</code> in our search query output.
+Simply use it as following:</p>
+<div class="codehilite"><pre><span></span>index=main sourcetype=stoq &quot;19th Century Holiday Cheer Assignment.docm&quot; | table _time  results{}.workers.smtp.from
+</pre></div>
+
+<div class="admonition success">
+<p class="admonition-title">Training Question 5: Correct</p>
+<p>The password is  <code>bradly.buttercups@eifu.org</code>.</p>
+</div>
+<hr />
+<h3 id="what-youve-learned">🎓 What you've learned<a class="headerlink" href="#what-youve-learned" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Using splunk search query by <code>word</code>, <code>sourcetype</code>, <code>EventCode</code>, <code>process_id</code>  and how to look for <code>Interesting Fields</code>.</li>
+<li>Windows Process Execution events (Event ID <code>4688</code> for new process created)</li>
+<li>Sysmon Event id <code>1</code> for Process creation.</li>
+<li>Reverse the results order and Pivot on time.</li>
+<li>The <code>4688</code> events record process IDs in <code>hexadecimal</code>.</li>
+<li>Using <code>stoQ</code> tool to search emails.</li>
+</ul>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../challenge3/" title="Xmas laser cheers" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Xmas laser cheers
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../challenge5/" title="Mongo Pilfer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Mongo Pilfer
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Santa NP
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://twitter.com/salaheldinaz" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://salaheldin.online" class="md-footer-social__link fa fa-ra"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/asciinema-player.js"></script>
+      
+    
+  </body>
+</html>

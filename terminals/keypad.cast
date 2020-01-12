@@ -1,0 +1,10 @@
+{"version": 2, "width": 96, "height": 32, "timestamp": 1578561354, "env": {"SHELL": "/bin/bash", "TERM": "xterm"}}
+[0.010602, "o", "\u001b]0;slingshot@slingshot: ~/Desktop/Kringlecon\u0007slingshot@slingshot:~/Desktop/Kringlecon$ "]
+[1.817245, "o", "python3 keypad.py"]
+[2.317115, "o", "\r\n"]
+[2.332321, "o", "Possible Combinations: \r\n [1373, 1377, 1337, 1733, 1737, 1773, 3173, 3177, 3137, 3713, 3717, 3731, 3737, 3771, 3773, 3317, 3371, 3377, 7133, 7137, 7173, 7313, 7317, 7331, 7337, 7371, 7373, 7713, 7731, 7733] \r\n\r\n1373 is a prime number\r\n"]
+[2.332377, "o", "1733 is a prime number\r\n"]
+[2.332576, "o", "3137 is a prime number\r\n"]
+[2.332865, "o", "3371 is a prime number\r\n"]
+[2.333191, "o", "7331 is a prime number\r\n\r\n Possible code: \r\n [1373, 1733, 3137, 3371, 7331]\r\n"]
+
