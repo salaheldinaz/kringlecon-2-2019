@@ -8,7 +8,9 @@ Please Visit https://kringlecon2.salaheldin.online/ to view the writeup
 
 ## 🗺 Map
 
-This a preview of a very high quality map for ELF University, to zoom and check the details please download the full quality. [click here](/images/kringlecon-map.png):
+This a preview of a very high quality map for ELF University.
+
+### To zoom and check the details please download the full quality. [click here](/images/kringlecon-map.png):
 
 ![Map](images/map.jpg)
 
