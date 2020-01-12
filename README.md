@@ -1,4 +1,6 @@
 # kringlecon-2-2019
+![Cover](images/kringlecon-cover.png)
+
 Detailed technical write-up for KRINGLECON 2 CTF
 by [Salaheldin](https://twitter.com/salaheldinaz)
 
